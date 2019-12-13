@@ -16,21 +16,37 @@
                 <rect key="frame" x="0.0" y="0.0" width="271" height="192"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VdA-oK-7bf">
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FVX-cn-wko">
                         <rect key="frame" x="0.0" y="0.0" width="271" height="192"/>
-                    </imageView>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VdA-oK-7bf">
+                                <rect key="frame" x="0.0" y="0.0" width="271" height="192"/>
+                            </imageView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="height" secondItem="VdA-oK-7bf" secondAttribute="height" id="5Hj-9M-t4e"/>
+                            <constraint firstItem="VdA-oK-7bf" firstAttribute="leading" secondItem="snc-92-Guc" secondAttribute="leading" id="Qdm-Ts-9g4"/>
+                            <constraint firstItem="VdA-oK-7bf" firstAttribute="trailing" secondItem="snc-92-Guc" secondAttribute="trailing" id="bhv-WO-deP"/>
+                            <constraint firstItem="VdA-oK-7bf" firstAttribute="top" secondItem="snc-92-Guc" secondAttribute="top" id="nyS-O0-gFB"/>
+                            <constraint firstAttribute="width" secondItem="VdA-oK-7bf" secondAttribute="width" id="oUL-gY-6dw"/>
+                            <constraint firstItem="VdA-oK-7bf" firstAttribute="bottom" secondItem="snc-92-Guc" secondAttribute="bottom" id="s5f-fR-FYf"/>
+                        </constraints>
+                        <viewLayoutGuide key="contentLayoutGuide" id="fft-uw-Kr9"/>
+                        <viewLayoutGuide key="frameLayoutGuide" id="snc-92-Guc"/>
+                    </scrollView>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="VdA-oK-7bf" secondAttribute="bottom" id="1SZ-Ux-kcN"/>
-                <constraint firstAttribute="trailing" secondItem="VdA-oK-7bf" secondAttribute="trailing" id="FdE-wW-fcV"/>
-                <constraint firstItem="VdA-oK-7bf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="T1h-dG-kX3"/>
-                <constraint firstItem="VdA-oK-7bf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="sja-LE-HW4"/>
+                <constraint firstItem="FVX-cn-wko" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="5ML-Qc-s37"/>
+                <constraint firstAttribute="bottom" secondItem="FVX-cn-wko" secondAttribute="bottom" id="7Ld-Gu-iUB"/>
+                <constraint firstItem="FVX-cn-wko" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="F7H-v5-gpZ"/>
+                <constraint firstAttribute="trailing" secondItem="FVX-cn-wko" secondAttribute="trailing" id="FgA-2r-aSS"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="271" height="192"/>
             <connections>
                 <outlet property="imageView" destination="VdA-oK-7bf" id="kfs-q2-9Ja"/>
+                <outlet property="scrollView" destination="FVX-cn-wko" id="Aaw-uI-rwA"/>
             </connections>
             <point key="canvasLocation" x="297.82608695652175" y="181.47321428571428"/>
         </collectionViewCell>

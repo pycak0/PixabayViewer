@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 class PixabayPhotosViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -28,13 +27,15 @@ class PixabayPhotosViewController: UIViewController {
         //searchBar.sizeToFit()
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-
-        //searchBar.placeholder = "Find pictures"
         searchController.searchBar.placeholder = "Find pictures"
         self.navigationItem.searchController = searchController
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        //searchBar.delegate = self
+        //searchBar.sizeToFit()
+        //searchBar.placeholder = "Find pictures"
     }
 
     override func didReceiveMemoryWarning() {

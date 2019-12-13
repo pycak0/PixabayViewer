@@ -73,10 +73,10 @@ class PixabaySearchProcessing {
                         
                 for picture in hits {
                     guard
-                        //let imageID = picture["id"] as? String,
+                        //let id = picture["id"] as? String,
                         let previewURL = picture["previewURL"] as? String,
-                        let imageURL = picture["webformatURL"] as? String
-                        //let likes = picture["likes"] as? Int
+                        let imageURL = picture["webformatURL"] as? String,
+                        let likes = picture["likes"] as? Int
                         else {
                             DispatchQueue.main.async {
                                 completion(Result.error(Error.notAllPartsFound))
@@ -84,7 +84,7 @@ class PixabaySearchProcessing {
                             return
                     }
                         
-                    let pixabayPhoto = PixabayPhoto(imageID: "1", imageURL: imageURL, previewURL: previewURL, likes: 0)
+                    let pixabayPhoto = PixabayPhoto(id: "1", imageURL: imageURL, previewURL: previewURL, likes: likes)
                             
                     guard
                         let url = URL(string: pixabayPhoto.previewURL),

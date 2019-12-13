@@ -8,11 +8,23 @@
 
 import UIKit
 
-class FullScreenPhotoCell: UICollectionViewCell {
+class FullScreenPhotoCell: UICollectionViewCell, UIScrollViewDelegate {
+    //From XIB
     @IBOutlet weak var imageView: UIImageView!
+    //From storyboard
+    //@IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var scrollView: UIScrollView!
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.scrollView.delegate = self
+        self.scrollView.minimumZoomScale = 1.0
+        self.scrollView.maximumZoomScale = 3.5
+        
     }
 
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15508" systemVersion="19B88" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="FullSize" representedClassName="FullSize" syncable="YES">
+        <attribute name="imageData" optional="YES" attributeType="Binary"/>
+        <relationship name="thumbnail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Thumbnail" inverseName="fullSize" inverseEntity="Thumbnail"/>
+    </entity>
+    <entity name="Thumbnail" representedClassName="Thumbnail" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <relationship name="fullSize" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FullSize" inverseName="thumbnail" inverseEntity="FullSize"/>
+    </entity>
+    <elements>
+        <element name="FullSize" positionX="-332.609375" positionY="-45.3203125" width="128" height="73"/>
+        <element name="Thumbnail" positionX="-54" positionY="0" width="128" height="88"/>
+    </elements>
+</model>

@@ -9,7 +9,7 @@
 import UIKit
 
 class PixabayPhoto: Equatable {
-    let imageID: String
+    let id: String
     let imageURL: String
     let previewURL: String
     let likes: Int
@@ -17,8 +17,8 @@ class PixabayPhoto: Equatable {
     //MARK:-IMPORTANT! Identify full image in 'Search Processing'
     var image: UIImage?
     
-    init(imageID : String, imageURL: String, previewURL: String, likes: Int) {
-        self.imageID = imageID
+    init(id : String, imageURL: String, previewURL: String, likes: Int) {
+        self.id = id
         self.imageURL = imageURL
         self.likes = likes
         self.previewURL = previewURL
@@ -47,7 +47,7 @@ class PixabayPhoto: Equatable {
     
     
     static func == (lhs: PixabayPhoto, rhs: PixabayPhoto) -> Bool {
-        return lhs.imageID == rhs.imageID
+        return lhs.id == rhs.id
     }
 }
 

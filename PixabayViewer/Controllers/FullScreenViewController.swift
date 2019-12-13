@@ -10,6 +10,7 @@ import UIKit
 
 class FullScreenViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var likes: UIBarButtonItem!
     
     private let reuseIdentifier = "FullScreenCell"
     //var pixabayPhoto: PixabayPhoto!
@@ -27,6 +28,14 @@ class FullScreenViewController: UIViewController {
             self.collectionView.scrollToItem(at: self.indexPath, at: .centeredHorizontally, animated: false)
         }
     }
+    /*
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.isToolbarHidden = true;
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        self.navigationController?.isToolbarHidden = false;
+    }
+    */
 
 }
 
@@ -40,8 +49,9 @@ extension FullScreenViewController: UICollectionViewDelegate, UICollectionViewDa
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FullScreenPhotoCell
         //let image = pixabayPhotos.searchResults[indexPath.item].image!
         let targetSize = CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
-        cell.imageView.image = pixabayPhotos.searchResults[indexPath.item].image!//.resizeImage(targetSize: targetSize)
+        cell.imageView.image = pixabayPhotos.searchResults[indexPath.item].image!.resizeImage(targetSize: targetSize)
         //print("image size = ", cell.imageView.image!.size)
+        likes.title = String(pixabayPhotos.searchResults[indexPath.item].likes)
         return cell
     }
     
@@ -51,11 +61,14 @@ extension FullScreenViewController: UICollectionViewDelegate, UICollectionViewDa
 // MARK: - Flow Layout Delegate
 extension FullScreenViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let frameCV = collectionView.frame
+        let frameCV = view.frame
         let widthOfCell = frameCV.width
         let heightOfCell = frameCV.height
         //print("cell size = ", CGSize(width: widthOfCell, height: heightOfCell))
-        return CGSize(width: widthOfCell, height: heightOfCell)
+        return CGSize(width: widthOfCell, height: widthOfCell)
     }
     
+    
+    
 }
+

@@ -68,7 +68,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="You-bc-fck" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="926.08695652173924" y="2.6785714285714284"/>
+            <point key="canvasLocation" x="816" y="3"/>
         </scene>
         <!--Full Screen View Controller-->
         <scene sceneID="KSH-Cn-f44">
@@ -78,7 +78,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sJj-ay-9PK">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sJj-ay-9PK">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="bql-yC-fiN">
@@ -88,7 +88,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" id="ZFi-9Y-NdC" customClass="FullScreenPhotoCell" customModule="PixabayViewer" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="FullScreenCell" id="ZFi-9Y-NdC" customClass="FullScreenPhotoCell" customModule="PixabayViewer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -98,24 +98,40 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uwK-jx-YRJ">
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <items>
+                                    <barButtonItem title="Icon" image="heart" catalog="system" style="done" id="7bs-7f-DWd"/>
+                                    <barButtonItem enabled="NO" title="-0-" style="done" id="vPi-u9-Xg0">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Tf4-MI-hXb"/>
+                                    <barButtonItem systemItem="action" id="JT2-oO-M6Z"/>
+                                </items>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="sJj-ay-9PK" firstAttribute="top" secondItem="iFA-fo-q7O" secondAttribute="top" id="1nT-aD-T7y"/>
                             <constraint firstItem="sJj-ay-9PK" firstAttribute="leading" secondItem="iFA-fo-q7O" secondAttribute="leading" id="2wJ-JX-4cR"/>
+                            <constraint firstItem="uwK-jx-YRJ" firstAttribute="leading" secondItem="iFA-fo-q7O" secondAttribute="leading" id="6M9-21-Xm2"/>
                             <constraint firstItem="sJj-ay-9PK" firstAttribute="bottom" secondItem="iFA-fo-q7O" secondAttribute="bottom" id="Egl-TO-a8F"/>
+                            <constraint firstItem="iFA-fo-q7O" firstAttribute="bottom" secondItem="uwK-jx-YRJ" secondAttribute="bottom" id="Qy0-Z5-uev"/>
+                            <constraint firstItem="uwK-jx-YRJ" firstAttribute="trailing" secondItem="iFA-fo-q7O" secondAttribute="trailing" id="Xda-HK-Vhq"/>
                             <constraint firstItem="sJj-ay-9PK" firstAttribute="trailing" secondItem="iFA-fo-q7O" secondAttribute="trailing" id="iyY-8V-oie"/>
+                            <constraint firstItem="uwK-jx-YRJ" firstAttribute="top" secondItem="sJj-ay-9PK" secondAttribute="bottom" constant="-44" id="uth-2t-Y3a"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iFA-fo-q7O"/>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="qDo-aq-FG2"/>
                     <connections>
                         <outlet property="collectionView" destination="sJj-ay-9PK" id="GHu-Xd-6EH"/>
+                        <outlet property="likes" destination="vPi-u9-Xg0" id="n0q-T0-UzM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aev-Rl-PUK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1778" y="3"/>
+            <point key="canvasLocation" x="1619" y="3"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Xa1-x7-oi4">
@@ -127,6 +143,9 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dta-Nm-Guf">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="RRF-ni-jRs" kind="relationship" relationship="rootViewController" id="1IX-p5-Zxv"/>
                     </connections>
@@ -136,4 +155,7 @@
             <point key="canvasLocation" x="15.942028985507248" y="2.6785714285714284"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="heart" catalog="system" width="64" height="54"/>
+    </resources>
 </document>
