@@ -24,6 +24,10 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="hP1-hf-J67">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                </activityIndicatorView>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PixabayCell" id="ioo-Tl-1VJ" customClass="PixabayPhotoCell" customModule="PixabayViewer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
@@ -62,6 +66,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="PixabayViewer" id="ZjT-eT-3zu"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="hP1-hf-J67" id="SZ4-wc-dWB"/>
                         <outlet property="collectionView" destination="uJN-ED-0eL" id="gtn-Vl-7gS"/>
                         <segue destination="ta9-C4-9rC" kind="show" id="f2p-bj-tBj"/>
                     </connections>

@@ -65,7 +65,7 @@ extension FullScreenViewController: UICollectionViewDelegateFlowLayout {
         let widthOfCell = frameCV.width
         let heightOfCell = frameCV.height
         //print("cell size = ", CGSize(width: widthOfCell, height: heightOfCell))
-        return CGSize(width: widthOfCell, height: widthOfCell)
+        return CGSize(width: widthOfCell, height: heightOfCell)
     }
     
     
