@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class PixabayPhotosViewController: UIViewController {
 
@@ -23,6 +24,9 @@ class PixabayPhotosViewController: UIViewController {
     private var searchButtonIsSelected = false
     //private var pixabayPhoto: PixabayPhoto!
 
+    //private let image = UIImage(named: "bigicon.jpg")
+    private var savedImagesData: [URL] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.searchController = searchController
@@ -32,13 +36,83 @@ class PixabayPhotosViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        
+        loadImages()
+        if savedImagesData.count != 0 {
+            
+        } else {
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+}
 
+
+extension PixabayPhotosViewController {
+    //MARK:- Save Images
+    func saveImages(pixabayPhotos: [PixabayPhoto]) {
+        let document = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        print("Saving directory:", document)
+        for (index, picture) in pixabayPhotos.enumerated() {
+            let imgName = "\(index+1).jpg"
+            let imgUrl = document.appendingPathComponent(imgName)
+            //print(imgUrl.path)
+            //NOW saving only a thumbnail
+            let image = picture.thumbnail
+            if let data = image!.jpegData(compressionQuality:  1.0) {
+                do {
+                    try data.write(to: imgUrl)
+                    print("  Image \(index+1) saved")
+                } catch {
+                    print("  Error saving an image \(index+1):", error)
+                }
+                
+                
+            }
+            savedImagesData.append(imgUrl)
+        }
+        
+        let amountOfStoredImages = String(savedImagesData.count)
+        let fileName = "logAmount.txt"
+        let fileUrl = document.appendingPathComponent(fileName)
+        do {
+            try amountOfStoredImages.write(to: fileUrl, atomically: false, encoding: .utf8)
+            print("Log file saved. Saving Completed")
+        } catch {
+            print("Error saving a log file:", error)
+        }
+    }
+    
+    //MARK:- Load Images
+    func loadImages() {
+        let document = try! FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let fileName = "logAmount.txt"
+        let fileUrl = document.appendingPathComponent(fileName)
+        var amount: Int?
+        do {
+            let log = try String(contentsOf: fileUrl, encoding: .utf8)
+            amount = Int(log)
+        }
+        catch {
+            print("error reading a log file:", error)
+        }
+        
+        if amount != nil {
+            for index in 0...amount! {
+                let imgName = "\(index+1).jpg"
+                let imgUrl = document.appendingPathComponent(imgName)
+                if FileManager.default.fileExists(atPath: imgUrl.path) {
+                    savedImagesData.append(imgUrl)
+                }
+            }
+        }
+    }
 }
 
 //MARK:- Searches and Some Configurations
@@ -89,6 +163,8 @@ extension PixabayPhotosViewController: UISearchResultsUpdating, UISearchBarDeleg
                 case .results(let results):
                     print("Found \(results.searchResults.count) matching '\(results.query)'")
                     self.searches.append(results)
+                    self.savedImagesData = []
+                    self.saveImages(pixabayPhotos: results.searchResults)
                 }
                 self.activateIndicator(shouldActivate: false)
                 self.collectionView.reloadData()
@@ -107,27 +183,56 @@ extension PixabayPhotosViewController: UISearchResultsUpdating, UISearchBarDeleg
     
 }
 
-//MARK:- Collection View Delegate
+//MARK:- Collection View Delegate & Data Source
 extension PixabayPhotosViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return searches.count
+        return 1 // or searches.count // but it is not used not
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return searches[section].searchResults.count
+        var numberOfItems = 0
+        if searches.count != 0 {
+            numberOfItems = searches[section].searchResults.count
+        }
+        else {
+            numberOfItems = savedImagesData.count
+        }
+        return numberOfItems
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PixabayPhotoCell
-        let pixabayPhoto = photo(for: indexPath)
-        cell.backgroundColor = .white
-        cell.imageView.image = pixabayPhoto.thumbnail
+        cell.backgroundColor = .clear
+        if savedImagesData.count != 0 && searches.count == 0 {
+            cell.imageView.image = UIImage(contentsOfFile: savedImagesData[indexPath.row].path)
+        } else {
+            let pixabayPhoto = photo(for: indexPath)
+            cell.imageView.image = pixabayPhoto.thumbnail
+        }
         return cell
     }
     
+    /*
+    //MARK:- Implementing Header
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+      switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            guard
+                let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "\(PixabayPhotoHeaderView.self)", for: indexPath) as? PixabayPhotoHeaderView
+                else {
+                    fatalError("Invalid view type")
+            }
+
+        headerView.label.text = "Some Header"
+        return headerView
+      default:
+        assert(false, "Invalid element type")
+      }
+    }
+ */
+ 
     //MARK:- Transition to Full Screen
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = storyboard?.instantiateViewController(identifier: "FullScreenViewController") as! FullScreenViewController
         /* Getting it ready -- probable will be replaced to FullScreenController
         self.pixabay.getBigPictures(for: searches[0]) { searchResults in
             switch searchResults {
@@ -139,9 +244,14 @@ extension PixabayPhotosViewController : UICollectionViewDelegate, UICollectionVi
             }
         }
         */
-        vc.pixabayPhotos = searches[0]
-        vc.indexPath = indexPath
-        self.navigationController?.pushViewController(vc, animated: true)
+        if searches.count != 0 {
+            if searches[0].searchResults[0].image != nil {
+                let vc = storyboard?.instantiateViewController(identifier: "FullScreenViewController") as! FullScreenViewController
+                vc.pixabayPhotos = searches[0]
+                vc.indexPath = indexPath
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     }
 }
 

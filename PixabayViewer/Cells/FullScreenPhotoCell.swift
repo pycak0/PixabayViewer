@@ -13,18 +13,12 @@ class FullScreenPhotoCell: UICollectionViewCell, UIScrollViewDelegate {
     @IBOutlet weak var imageView: UIImageView!
     //From storyboard
     //@IBOutlet weak var imageView: UIImageView!
-    
     @IBOutlet weak var scrollView: UIScrollView!
+    let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(recognizer:)))
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.scrollView.delegate = self
-        self.scrollView.minimumZoomScale = 1.0
-        self.scrollView.maximumZoomScale = 3.5
-        
-        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(recognizer:)))
-        doubleTap.numberOfTapsRequired = 2
-        scrollView.addGestureRecognizer(doubleTap)
+        configureScrollView()
     }
 
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
@@ -38,29 +32,16 @@ class FullScreenPhotoCell: UICollectionViewCell, UIScrollViewDelegate {
             scrollView.setZoomScale(scrollView.maximumZoomScale, animated: true)
         }
     }
-    
-    /*
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        adjustFrameToCenter()
-    }
-    
-    func adjustFrameToCenter() {
-        let boundsSize = self.bounds.size
-        var frameToCenter = imageView.frame
-        
-        if frameToCenter.size.width < boundsSize.width {
-            frameToCenter.origin.x = (boundsSize.width - frameToCenter.size.width) / 2
-        } else {
-            frameToCenter.origin.x = 0
-        }
-        
-        if frameToCenter.size.height < boundsSize.height {
-            frameToCenter.origin.y = (boundsSize.height - frameToCenter.size.height) / 2
-        } else {
-            frameToCenter.origin.y = 0
-        }
-        
-        imageView.frame = frameToCenter
-    }
+
+    func configureScrollView() {
+        self.scrollView.delegate = self
+        self.scrollView.minimumZoomScale = 1.0
+        self.scrollView.maximumZoomScale = 3.5
+        self.doubleTap.numberOfTapsRequired = 2
+        self.scrollView.addGestureRecognizer(doubleTap)
+        /*
+        self.scrollView.showsVerticalScrollIndicator = false
+        self.scrollView.showsHorizontalScrollIndicator = false
  */
+    }
 }

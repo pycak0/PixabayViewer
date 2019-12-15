@@ -73,7 +73,7 @@ class PixabaySearchProcessing {
                         }
                         return
                 }
-                print("get pictures", hits)
+                //print("get pictures", hits)
                             
                 var pixabayPhotos = [PixabayPhoto]()
                 var amount = 0
@@ -128,22 +128,24 @@ class PixabaySearchProcessing {
                         }
                         if let fullSizeImg = UIImage(data: imageData_f) {
                             pixabayPhoto.image = fullSizeImg
-                            print("big image url:", fullSizeUrl)
+                            print("Full Size image URL:", fullSizeUrl)
                         }
                         else {
-                            print("Big image error")
+                            print("Full Size image error")
                         }
                         
                         pixabayPhotos.append(pixabayPhoto)
                     }//if-clause end
                     
                 } //here is the end of for cylce
-                print(pixabayPhotos.count)
+                //print(pixabayPhotos.count)
                 
+                /*
                 print("picture links are")
                 for pic in pixabayPhotos{
                     print(pic.previewURL)
                 }
+                */
                             
                 let searchResults = PixabaySearchResults(query: query!, searchResults: pixabayPhotos)
                 DispatchQueue.main.async {
