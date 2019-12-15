@@ -127,8 +127,16 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uwK-jx-YRJ">
                                 <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
-                                    <barButtonItem title="Icon" image="heart" catalog="system" style="done" id="7bs-7f-DWd"/>
+                                    <barButtonItem title="Icon" image="heart" catalog="system" style="done" id="7bs-7f-DWd" userLabel="Heart"/>
                                     <barButtonItem enabled="NO" title="-0-" style="done" id="vPi-u9-Xg0">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </barButtonItem>
+                                    <barButtonItem image="star" catalog="system" style="done" id="Yjb-bv-xdB" userLabel="Star"/>
+                                    <barButtonItem enabled="NO" title="-0-" style="done" id="5aw-1X-4GC" userLabel="Favorites">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </barButtonItem>
+                                    <barButtonItem title="Item" image="eye" catalog="system" style="done" id="84c-Ch-7q6" userLabel="Eye"/>
+                                    <barButtonItem enabled="NO" title="-0-" style="done" id="pCx-X6-HGx">
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Tf4-MI-hXb"/>
@@ -152,7 +160,9 @@
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="qDo-aq-FG2"/>
                     <connections>
                         <outlet property="collectionView" destination="sJj-ay-9PK" id="GHu-Xd-6EH"/>
+                        <outlet property="favorites" destination="5aw-1X-4GC" id="UIQ-ea-mKI"/>
                         <outlet property="likes" destination="vPi-u9-Xg0" id="n0q-T0-UzM"/>
+                        <outlet property="views" destination="pCx-X6-HGx" id="iYx-SW-spw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aev-Rl-PUK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -182,6 +192,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="eye" catalog="system" width="64" height="40"/>
         <image name="heart" catalog="system" width="64" height="54"/>
+        <image name="star" catalog="system" width="64" height="58"/>
     </resources>
 </document>

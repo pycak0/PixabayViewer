@@ -11,6 +11,8 @@ import UIKit
 class FullScreenViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var likes: UIBarButtonItem!
+    @IBOutlet weak var favorites: UIBarButtonItem!
+    @IBOutlet weak var views: UIBarButtonItem!
     
     private let reuseIdentifier = "FullScreenCell"
     //var pixabayPhoto: PixabayPhoto!
@@ -41,9 +43,12 @@ extension FullScreenViewController: UICollectionViewDelegate, UICollectionViewDa
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FullScreenPhotoCell
         //let image = pixabayPhotos.searchResults[indexPath.item].image!
         let targetSize = CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
-        cell.imageView.image = pixabayPhotos.searchResults[indexPath.item].image!.resizeImage(targetSize: targetSize)
+        let searchResult = pixabayPhotos.searchResults[indexPath.item]
+        cell.imageView.image = searchResult.image!.resizeImage(targetSize: targetSize)
         //print("image size = ", cell.imageView.image!.size)
-        likes.title = String(pixabayPhotos.searchResults[indexPath.item].likes)
+        likes.title = String(searchResult.likes)
+        favorites.title = String(searchResult.favorites)
+        views.title = String(searchResult.views)
         return cell
     }
     

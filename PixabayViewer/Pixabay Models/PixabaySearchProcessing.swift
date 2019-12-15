@@ -84,6 +84,7 @@ class PixabaySearchProcessing {
                         let imageURL = picture["webformatURL"] as? String,
                         let likes = picture["likes"] as? Int,
                         let favorites = picture["favorites"] as? Int,
+                        let views = picture["views"] as? Int,
                         let height = picture["imageHeight"] as? Int,
                         let width = picture["imageWidth"] as? Int
                         else {
@@ -98,18 +99,18 @@ class PixabaySearchProcessing {
                         if amount > numberOfImgs {
                             break
                         }
-                        let pixabayPhoto = PixabayPhoto(id: "1", imageURL: imageURL, previewURL: previewURL, likes: likes, favorites: favorites)
+                        let pixabayPhoto = PixabayPhoto(imageURL: imageURL, previewURL: previewURL, likes: likes, favorites: favorites, views: views)
                                 
                         guard
                             let previewUrl = URL(string: pixabayPhoto.previewURL),
-                            let imageData_t = try? Data(contentsOf: previewUrl as URL)
+                            let imageDataThumbnail = try? Data(contentsOf: previewUrl as URL)
                             else {
                                 DispatchQueue.main.async {
                                     completion(Result.error(Error.urlError))
                                 }
                                 return
                         }
-                        if let thumbnail = UIImage(data: imageData_t) {
+                        if let thumbnail = UIImage(data: imageDataThumbnail) {
                             pixabayPhoto.thumbnail = thumbnail
                             //print("url:", previewUrl)
                         }
@@ -120,14 +121,14 @@ class PixabaySearchProcessing {
                         
                         guard
                             let fullSizeUrl = URL(string: pixabayPhoto.imageURL),
-                            let imageData_f = try? Data(contentsOf: fullSizeUrl as URL)
+                            let imageDataFullSize = try? Data(contentsOf: fullSizeUrl as URL)
                             else {
                                 DispatchQueue.main.async {
                                     completion(Result.error(Error.urlError))
                                 }
                                 return
                         }
-                        if let fullSizeImg = UIImage(data: imageData_f) {
+                        if let fullSizeImg = UIImage(data: imageDataFullSize) {
                             pixabayPhoto.image = fullSizeImg
                             print("Full Size image URL:", fullSizeUrl)
                         }

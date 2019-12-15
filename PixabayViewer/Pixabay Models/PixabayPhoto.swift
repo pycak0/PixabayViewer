@@ -9,21 +9,22 @@
 import UIKit
 
 class PixabayPhoto: Equatable {
-    let id: String
+    let id: String = "1"
     let imageURL: String
     let previewURL: String
     let likes: Int
     let favorites: Int
+    let views: Int
     var thumbnail: UIImage?
     //MARK:-IMPORTANT! Identify full image in 'Search Processing'
     var image: UIImage?
     
-    init(id : String, imageURL: String, previewURL: String, likes: Int, favorites: Int) {
-        self.id = id
+    init(imageURL: String, previewURL: String, likes: Int, favorites: Int, views: Int) {
         self.imageURL = imageURL
         self.likes = likes
         self.previewURL = previewURL
         self.favorites = favorites
+        self.views = views
     }
     
     func sizeToFillWidth(of size:CGSize) -> CGSize {
