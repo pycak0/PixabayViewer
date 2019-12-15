@@ -14,11 +14,18 @@ class FullScreenPhotoCell: UICollectionViewCell, UIScrollViewDelegate {
     //From storyboard
     //@IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var scrollView: UIScrollView!
-    let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(recognizer:)))
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        configureScrollView()
+        self.scrollView.delegate = self
+        self.scrollView.minimumZoomScale = 1.0
+        self.scrollView.maximumZoomScale = 3.5
+        self.scrollView.isUserInteractionEnabled = true
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(recognizer:)))
+        doubleTap.numberOfTapsRequired = 2
+        self.scrollView.addGestureRecognizer(doubleTap)
+        self.scrollView.showsVerticalScrollIndicator = false
+        self.scrollView.showsHorizontalScrollIndicator = false
     }
 
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
@@ -32,16 +39,17 @@ class FullScreenPhotoCell: UICollectionViewCell, UIScrollViewDelegate {
             scrollView.setZoomScale(scrollView.maximumZoomScale, animated: true)
         }
     }
-
+/*
     func configureScrollView() {
         self.scrollView.delegate = self
         self.scrollView.minimumZoomScale = 1.0
         self.scrollView.maximumZoomScale = 3.5
         self.doubleTap.numberOfTapsRequired = 2
         self.scrollView.addGestureRecognizer(doubleTap)
-        /*
+        
         self.scrollView.showsVerticalScrollIndicator = false
         self.scrollView.showsHorizontalScrollIndicator = false
+     }
  */
-    }
+    
 }

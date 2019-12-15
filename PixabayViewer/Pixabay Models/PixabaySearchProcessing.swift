@@ -83,6 +83,7 @@ class PixabaySearchProcessing {
                         let previewURL = picture["previewURL"] as? String,
                         let imageURL = picture["webformatURL"] as? String,
                         let likes = picture["likes"] as? Int,
+                        let favorites = picture["favorites"] as? Int,
                         let height = picture["imageHeight"] as? Int,
                         let width = picture["imageWidth"] as? Int
                         else {
@@ -97,7 +98,7 @@ class PixabaySearchProcessing {
                         if amount > numberOfImgs {
                             break
                         }
-                        let pixabayPhoto = PixabayPhoto(id: "1", imageURL: imageURL, previewURL: previewURL, likes: likes)
+                        let pixabayPhoto = PixabayPhoto(id: "1", imageURL: imageURL, previewURL: previewURL, likes: likes, favorites: favorites)
                                 
                         guard
                             let previewUrl = URL(string: pixabayPhoto.previewURL),

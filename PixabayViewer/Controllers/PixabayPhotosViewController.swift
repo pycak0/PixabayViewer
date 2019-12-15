@@ -63,7 +63,8 @@ extension PixabayPhotosViewController {
             let imgName = "\(index+1).jpg"
             let imgUrl = document.appendingPathComponent(imgName)
             //print(imgUrl.path)
-            //NOW saving only a thumbnail
+            
+            //as for NOW, saving only a thumbnail
             let image = picture.thumbnail
             if let data = image!.jpegData(compressionQuality:  1.0) {
                 do {
@@ -72,7 +73,6 @@ extension PixabayPhotosViewController {
                 } catch {
                     print("  Error saving an image \(index+1):", error)
                 }
-                
                 
             }
             savedImagesData.append(imgUrl)
@@ -126,6 +126,7 @@ private extension PixabayPhotosViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Find pictures"
         searchController.searchBar.delegate = self
+        searchController.searchBar.autocorrectionType = .yes
     }
     
     func activateIndicator(shouldActivate: Bool) {
@@ -135,6 +136,12 @@ private extension PixabayPhotosViewController {
         } else {
             activityIndicator.stopAnimating()
         }
+    }
+    
+    func clearCollectionView() {
+        self.searches = []
+        self.savedImagesData = []
+        self.collectionView.reloadData()
     }
     
     /*
@@ -153,9 +160,7 @@ extension PixabayPhotosViewController: UISearchResultsUpdating, UISearchBarDeleg
     func updateSearchResults(for searchController: UISearchController) {
         let text = searchController.searchBar.text!
         if searchButtonIsSelected {
-            self.searches = []
-            self.savedImagesData = []
-            self.collectionView.reloadData()
+            self.clearCollectionView()
             self.activateIndicator(shouldActivate: true)
             self.pixabay.getPictures(query: text) { searchResults in
                 switch searchResults {
