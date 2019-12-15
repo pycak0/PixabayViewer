@@ -24,6 +24,7 @@
 		A45AFB3223A414C600DB2FB7 /* Thumbnail+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45AFB2E23A414C600DB2FB7 /* Thumbnail+CoreDataProperties.swift */; };
 		A45AFB3323A414C600DB2FB7 /* FullSize+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45AFB2F23A414C600DB2FB7 /* FullSize+CoreDataClass.swift */; };
 		A45AFB3423A414C600DB2FB7 /* FullSize+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45AFB3023A414C600DB2FB7 /* FullSize+CoreDataProperties.swift */; };
+		A467CA4923A6F0AF00CC945D /* SavingAndLoadingExtention.swift in Sources */ = {isa = PBXBuildFile; fileRef = A467CA4823A6F0AF00CC945D /* SavingAndLoadingExtention.swift */; };
 		A47BBBE723A2ED3300266713 /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47BBBE623A2ED3300266713 /* FullScreenViewController.swift */; };
 		A47BBBEF23A2FB6E00266713 /* FullScreenPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A47BBBED23A2FB6E00266713 /* FullScreenPhotoCell.swift */; };
 		A47BBBF023A2FB6E00266713 /* FullScreenPhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A47BBBEE23A2FB6E00266713 /* FullScreenPhotoCell.xib */; };
@@ -51,6 +52,7 @@
 		A45AFB2E23A414C600DB2FB7 /* Thumbnail+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Thumbnail+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		A45AFB2F23A414C600DB2FB7 /* FullSize+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FullSize+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A45AFB3023A414C600DB2FB7 /* FullSize+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FullSize+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A467CA4823A6F0AF00CC945D /* SavingAndLoadingExtention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavingAndLoadingExtention.swift; sourceTree = "<group>"; };
 		A47BBBE623A2ED3300266713 /* FullScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
 		A47BBBED23A2FB6E00266713 /* FullScreenPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenPhotoCell.swift; sourceTree = "<group>"; };
 		A47BBBEE23A2FB6E00266713 /* FullScreenPhotoCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FullScreenPhotoCell.xib; sourceTree = "<group>"; };
@@ -134,6 +136,7 @@
 			children = (
 				A445CDA6239EF18E000B2ED8 /* PixabayPhotosViewController.swift */,
 				A47BBBE623A2ED3300266713 /* FullScreenViewController.swift */,
+				A467CA4A23A6F1AC00CC945D /* Extensions */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -159,6 +162,14 @@
 				A45AFB3023A414C600DB2FB7 /* FullSize+CoreDataProperties.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		A467CA4A23A6F1AC00CC945D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A467CA4823A6F0AF00CC945D /* SavingAndLoadingExtention.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		A47BBBE823A2EFDE00266713 /* Cells */ = {
@@ -247,6 +258,7 @@
 			files = (
 				A45AFB3123A414C600DB2FB7 /* Thumbnail+CoreDataClass.swift in Sources */,
 				A445CDB5239EF555000B2ED8 /* PixabayPhotoCell.swift in Sources */,
+				A467CA4923A6F0AF00CC945D /* SavingAndLoadingExtention.swift in Sources */,
 				A445CD8D239EF0A1000B2ED8 /* AppDelegate.swift in Sources */,
 				A4C2D66923A695A400FEC415 /* PixabayPhotoHeaderView.swift in Sources */,
 				A45AFB3223A414C600DB2FB7 /* Thumbnail+CoreDataProperties.swift in Sources */,

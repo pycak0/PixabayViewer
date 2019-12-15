@@ -10,5 +10,5 @@ import Foundation
 
 struct PixabaySearchResults {
     let query: String
-    let searchResults: [PixabayPhoto]
+    var searchResults: [PixabayPhoto]
 }
