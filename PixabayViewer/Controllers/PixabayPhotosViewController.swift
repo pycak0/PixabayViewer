@@ -154,6 +154,7 @@ extension PixabayPhotosViewController: UISearchResultsUpdating, UISearchBarDeleg
         let text = searchController.searchBar.text!
         if searchButtonIsSelected {
             self.searches = []
+            self.savedImagesData = []
             self.collectionView.reloadData()
             self.activateIndicator(shouldActivate: true)
             self.pixabay.getPictures(query: text) { searchResults in
@@ -212,7 +213,7 @@ extension PixabayPhotosViewController : UICollectionViewDelegate, UICollectionVi
         return cell
     }
     
-    /*
+    
     //MARK:- Implementing Header
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
       switch kind {
@@ -222,14 +223,19 @@ extension PixabayPhotosViewController : UICollectionViewDelegate, UICollectionVi
                 else {
                     fatalError("Invalid view type")
             }
-
-        headerView.label.text = "Some Header"
-        return headerView
+            var text = "No images searched recently"
+            if searches.count != 0 {
+                text = "Found \(searches[0].searchResults.count) matching '\(searches[0].query)'"
+            } else if savedImagesData.count != 0 {
+                text = "Recently searched (full size is not available):"
+            }
+            headerView.label.text = text
+            return headerView
       default:
         assert(false, "Invalid element type")
       }
     }
- */
+ 
  
     //MARK:- Transition to Full Screen
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
