@@ -16,7 +16,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="271" height="192"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FVX-cn-wko">
+                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FVX-cn-wko">
                         <rect key="frame" x="0.0" y="0.0" width="271" height="192"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VdA-oK-7bf">
@@ -24,12 +24,10 @@
                             </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="height" secondItem="VdA-oK-7bf" secondAttribute="height" id="5Hj-9M-t4e"/>
-                            <constraint firstItem="VdA-oK-7bf" firstAttribute="leading" secondItem="snc-92-Guc" secondAttribute="leading" id="Qdm-Ts-9g4"/>
-                            <constraint firstItem="VdA-oK-7bf" firstAttribute="trailing" secondItem="snc-92-Guc" secondAttribute="trailing" id="bhv-WO-deP"/>
-                            <constraint firstItem="VdA-oK-7bf" firstAttribute="top" secondItem="snc-92-Guc" secondAttribute="top" id="nyS-O0-gFB"/>
-                            <constraint firstAttribute="width" secondItem="VdA-oK-7bf" secondAttribute="width" id="oUL-gY-6dw"/>
-                            <constraint firstItem="VdA-oK-7bf" firstAttribute="bottom" secondItem="snc-92-Guc" secondAttribute="bottom" id="s5f-fR-FYf"/>
+                            <constraint firstItem="VdA-oK-7bf" firstAttribute="centerX" secondItem="FVX-cn-wko" secondAttribute="centerX" id="H3E-9p-Prv"/>
+                            <constraint firstAttribute="width" secondItem="VdA-oK-7bf" secondAttribute="width" id="k8Y-CS-0ED"/>
+                            <constraint firstItem="VdA-oK-7bf" firstAttribute="centerY" secondItem="FVX-cn-wko" secondAttribute="centerY" id="lLP-y6-BwH"/>
+                            <constraint firstAttribute="height" secondItem="VdA-oK-7bf" secondAttribute="height" id="mVE-0a-HCs"/>
                         </constraints>
                         <viewLayoutGuide key="contentLayoutGuide" id="fft-uw-Kr9"/>
                         <viewLayoutGuide key="frameLayoutGuide" id="snc-92-Guc"/>

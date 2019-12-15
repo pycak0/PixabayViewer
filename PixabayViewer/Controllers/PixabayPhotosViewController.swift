@@ -28,8 +28,7 @@ class PixabayPhotosViewController: UIViewController {
         self.navigationItem.searchController = searchController
         configureSearchController()
         
-        activityIndicator.isHidden = true
-        activityIndicator.stopAnimating()
+        activateIndicator(shouldActivate: false)
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -42,7 +41,7 @@ class PixabayPhotosViewController: UIViewController {
 
 }
 
-//MARK:- Searches
+//MARK:- Searches and Some Configurations
 private extension PixabayPhotosViewController {
     func photo(for indexPath: IndexPath) -> PixabayPhoto {
         return searches[indexPath.section].searchResults[indexPath.row]
@@ -53,6 +52,15 @@ private extension PixabayPhotosViewController {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Find pictures"
         searchController.searchBar.delegate = self
+    }
+    
+    func activateIndicator(shouldActivate: Bool) {
+        activityIndicator.isHidden = !shouldActivate
+        if shouldActivate {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
+        }
     }
     
     /*
@@ -70,11 +78,10 @@ private extension PixabayPhotosViewController {
 extension PixabayPhotosViewController: UISearchResultsUpdating, UISearchBarDelegate {
     func updateSearchResults(for searchController: UISearchController) {
         let text = searchController.searchBar.text!
-        if searchButtonIsSelected && text.count >= 3 {
+        if searchButtonIsSelected {
             self.searches = []
             self.collectionView.reloadData()
-            self.activityIndicator.isHidden = false
-            self.activityIndicator.startAnimating()
+            self.activateIndicator(shouldActivate: true)
             self.pixabay.getPictures(query: text) { searchResults in
                 switch searchResults {
                 case .error(let error) :
@@ -83,8 +90,7 @@ extension PixabayPhotosViewController: UISearchResultsUpdating, UISearchBarDeleg
                     print("Found \(results.searchResults.count) matching '\(results.query)'")
                     self.searches.append(results)
                 }
-                self.activityIndicator.isHidden = true
-                self.activityIndicator.stopAnimating()
+                self.activateIndicator(shouldActivate: false)
                 self.collectionView.reloadData()
             }
         }
@@ -119,10 +125,10 @@ extension PixabayPhotosViewController : UICollectionViewDelegate, UICollectionVi
         return cell
     }
     
-    //MARK:- Transition implementation
+    //MARK:- Transition to Full Screen
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = storyboard?.instantiateViewController(identifier: "FullScreenViewController") as! FullScreenViewController
-        /*Getting it ready
+        /* Getting it ready -- probable will be replaced to FullScreenController
         self.pixabay.getBigPictures(for: searches[0]) { searchResults in
             switch searchResults {
             case .error(let error) :

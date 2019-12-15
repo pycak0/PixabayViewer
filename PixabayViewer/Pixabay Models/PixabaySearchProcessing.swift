@@ -23,7 +23,7 @@ class PixabaySearchProcessing {
     
 //MARK:- Get Pictures
     func getPictures(query: String, completion: @escaping (Result<PixabaySearchResults>) -> Void) {
-        let numberOfImgs = 15
+        let numberOfImgs = 5
         let k = 200 / numberOfImgs
         var orientation = "any"
         if numberOfImgs > 40 {

@@ -28,14 +28,6 @@ class FullScreenViewController: UIViewController {
             self.collectionView.scrollToItem(at: self.indexPath, at: .centeredHorizontally, animated: false)
         }
     }
-    /*
-    override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.isToolbarHidden = true;
-    }
-    override func viewDidDisappear(_ animated: Bool) {
-        self.navigationController?.isToolbarHidden = false;
-    }
-    */
 
 }
 
@@ -63,12 +55,11 @@ extension FullScreenViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let frameCV = view.frame
         let widthOfCell = frameCV.width
-        let heightOfCell = frameCV.height
+        
+        //let heightOfCell = frameCV.height
         //print("cell size = ", CGSize(width: widthOfCell, height: heightOfCell))
-        return CGSize(width: widthOfCell, height: heightOfCell)
+        return CGSize(width: widthOfCell, height: widthOfCell)
     }
-    
-    
     
 }
 
