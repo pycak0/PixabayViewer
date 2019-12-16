@@ -14,6 +14,19 @@ class FullScreenViewController: UIViewController {
     @IBOutlet weak var favorites: UIBarButtonItem!
     @IBOutlet weak var views: UIBarButtonItem!
     
+    
+    @IBAction func shareButtonPressed(_ sender: UIBarButtonItem) {
+        if let indexPath = collectionView.indexPathsForVisibleItems.last {
+            let cell = collectionView?.cellForItem(at: indexPath) as! FullScreenPhotoCell
+            if let image = (cell.imageView.image) {
+                let shareImage = [image]
+                let activityViewController = UIActivityViewController(activityItems: shareImage as [Any], applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view
+                self.present(activityViewController, animated: true, completion: nil)
+            }
+        }
+    }
+    
     private let reuseIdentifier = "FullScreenCell"
     //var pixabayPhoto: PixabayPhoto!
     var pixabayPhotos: PixabaySearchResults!
@@ -30,6 +43,8 @@ class FullScreenViewController: UIViewController {
             self.collectionView.scrollToItem(at: self.indexPath, at: .centeredHorizontally, animated: false)
         }
     }
+    
+    
 
 }
 
