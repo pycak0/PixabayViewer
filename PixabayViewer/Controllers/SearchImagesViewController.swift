@@ -1,5 +1,5 @@
 //
-//  PixabayPhotosViewController.swift
+//  SearchImagesViewController.swift
 //  PixabayViewer
 //
 //  Created by Владислав on 10.12.2019.
@@ -8,66 +8,75 @@
 
 import UIKit
 
-class PixabayPhotosViewController: UIViewController {
+class SearchImagesViewController: UIViewController {
 
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
     private let reuseIdentifier = "PixabayCell"
     private let sectionInsets = UIEdgeInsets(top: 15.0, left: 15.0, bottom: 15.0, right: 15.0)
     private let itemsPerRow: CGFloat = 3
-    private let searchController = UISearchController(searchResultsController: nil)
-    private let pixabay = PixabaySearchProcessing()
-    private var searches: [PixabaySearchResults] = []
     private var searchButtonIsSelected = false
-    //private var pixabayPhoto: PixabayPhoto!
 
-    //private let image = UIImage(named: "bigicon.jpg")
-    var savedImagesData: [URL] = []
+    private var foundImages = [PixabayImage]()
+    private var cachedImages = [UIImage?]()
+
+    //var savedImagesData: [URL] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.searchController = searchController
         configureSearchController()
-        
-        activateIndicator(shouldActivate: false)
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        loadImages()
-        if savedImagesData.count != 0 {
-            
-        } else {
-            
-        }
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        configureViews()
+        setLoadingIndicator(enabled: false)
     }
     
+    func findImages(query: String) {
+        clearCollectionView()
+        setLoadingIndicator(enabled: true)
+        PixabaySearch.shared.getImages(query: query) { (sessionResult) in
+            switch sessionResult {
+            case let .error(error):
+                print(error)
+            case let .success(images):
+                self.foundImages = images
+                self.cachedImages = Array(repeating: nil, count: images.count)
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    func loadImage(url: URL?, at index: Int) {
+        PixabaySearch.shared.getImage(with: url) { (image) in
+            self.cachedImages[index] = image
+            if let cell = self.collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? PixabayPhotoCell {
+                cell.imageView.image = image
+            }
+        }
+    }
     
 }
 
-//MARK:- Searches and Some Configurations
-private extension PixabayPhotosViewController {
-    func photo(for indexPath: IndexPath) -> PixabayPhoto {
-        return searches[indexPath.section].searchResults[indexPath.row]
-    }
+private extension SearchImagesViewController {
     
     func configureSearchController() {
+        let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Find pictures"
         searchController.searchBar.delegate = self
         searchController.searchBar.autocorrectionType = .yes
+        
+        self.navigationItem.searchController = searchController
     }
     
-    func activateIndicator(shouldActivate: Bool) {
-        activityIndicator.isHidden = !shouldActivate
-        if shouldActivate {
+    func configureViews() {
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+    
+    func setLoadingIndicator(enabled: Bool) {
+        activityIndicator.isHidden = !enabled
+        if enabled {
             activityIndicator.startAnimating()
         } else {
             activityIndicator.stopAnimating()
@@ -75,40 +84,25 @@ private extension PixabayPhotosViewController {
     }
     
     func clearCollectionView() {
-        self.searches = []
-        self.savedImagesData = []
+        self.foundImages.removeAll()
+        //self.savedImagesData = []
         self.collectionView.reloadData()
     }
 }
 
 //MARK:- Search Controller Delegate
-extension PixabayPhotosViewController: UISearchResultsUpdating, UISearchBarDelegate {
+extension SearchImagesViewController: UISearchResultsUpdating, UISearchBarDelegate {
+    
     func updateSearchResults(for searchController: UISearchController) {
         let text = searchController.searchBar.text!
         if searchButtonIsSelected {
-            self.clearCollectionView()
-            self.activateIndicator(shouldActivate: true)
-            self.pixabay.getPictures(query: text) { searchResults in
-                switch searchResults {
-                case .error(let error) :
-                    print("Error Searching: \(error)")
-                case .results(let results):
-                    print("Found \(results.searchResults.count) matching '\(results.query)'")
-                    self.searches.append(results)
-                    self.savedImagesData = []
-                    self.saveImages(pixabayPhotos: results.searchResults)
-                }
-                self.activateIndicator(shouldActivate: false)
-                self.collectionView.reloadData()
-            }
+            findImages(query: text)
         }
-        
-        //self.collectionView.reloadData()
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchButtonIsSelected = true
-        updateSearchResults(for: searchController)
+        updateSearchResults(for: navigationItem.searchController!)
         searchButtonIsSelected = false
         collectionView.reloadData()
     }
@@ -116,30 +110,23 @@ extension PixabayPhotosViewController: UISearchResultsUpdating, UISearchBarDeleg
 }
 
 //MARK:- Collection View Delegate & Data Source
-extension PixabayPhotosViewController : UICollectionViewDelegate, UICollectionViewDataSource {
+extension SearchImagesViewController : UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1 // or searches.count // but it is not used not
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        var numberOfItems = 0
-        if searches.count != 0 {
-            numberOfItems = searches[section].searchResults.count
-        }
-        else {
-            numberOfItems = savedImagesData.count
-        }
-        return numberOfItems
+        return foundImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PixabayPhotoCell
         cell.backgroundColor = .clear
-        if savedImagesData.count != 0 && searches.count == 0 {
-            cell.imageView.image = UIImage(contentsOfFile: savedImagesData[indexPath.row].path)
-        } else {
-            let pixabayPhoto = photo(for: indexPath)
-            cell.imageView.image = pixabayPhoto.thumbnail
+        if let image = cachedImages[indexPath.row] {
+            cell.imageView.image = image
+        } else if let stringUrl = foundImages[indexPath.row].previewURL,
+            let url = URL(string: stringUrl) {
+            loadImage(url: url, at: indexPath.row)
         }
         return cell
     }
@@ -155,10 +142,8 @@ extension PixabayPhotosViewController : UICollectionViewDelegate, UICollectionVi
                     fatalError("Invalid view type")
             }
             var text = "No images searched recently"
-            if searches.count != 0 {
-                text = "Found \(searches[0].searchResults.count) matching '\(searches[0].query)'"
-            } else if savedImagesData.count != 0 {
-                text = "Recently searched (full size is not available):"
+            if foundImages.count != 0 {
+                text = "Found \(foundImages.count) matching your query"
             }
             headerView.label.text = text
             return headerView
@@ -175,25 +160,23 @@ extension PixabayPhotosViewController : UICollectionViewDelegate, UICollectionVi
             switch searchResults {
             case .error(let error) :
                 print("Error Getting Images: \(error)")
-            case .results(let results):
-                self.searches = []
-                self.searches.append(results)
-            }
-        }
-        */
-        if searches.count != 0 {
-            if searches[0].searchResults[0].image != nil {
-                let vc = storyboard?.instantiateViewController(identifier: "FullScreenViewController") as! FullScreenViewController
-                vc.pixabayPhotos = searches[0]
-                vc.indexPath = indexPath
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
+         case .results(let results):
+         self.searches = []
+         self.searches.append(results)
+         }
+         }
+         */
+        if cachedImages[indexPath.row] != nil {
+            let vc = storyboard?.instantiateViewController(identifier: "FullScreenViewController") as! FullScreenViewController
+            vc.pixabayPhotos = foundImages
+            vc.indexPath = indexPath
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }
 
 // MARK: - Collection View Flow Layout Delegate
-extension PixabayPhotosViewController: UICollectionViewDelegateFlowLayout {
+extension SearchImagesViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace

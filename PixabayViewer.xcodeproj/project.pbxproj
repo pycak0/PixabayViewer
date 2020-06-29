@@ -7,17 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A40467A324AA310F007B244D /* PixabaySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40467A224AA310F007B244D /* PixabaySearch.swift */; };
+		A40467A524AA3137007B244D /* SessionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40467A424AA3137007B244D /* SessionError.swift */; };
+		A40467A724AA31FC007B244D /* SessionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40467A624AA31FC007B244D /* SessionResult.swift */; };
+		A40467AA24AA33B1007B244D /* PixabayImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40467A924AA33B1007B244D /* PixabayImage.swift */; };
+		A40467AC24AA34FB007B244D /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40467AB24AA34FB007B244D /* Globals.swift */; };
+		A40467AE24AA91CA007B244D /* QueryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40467AD24AA91CA007B244D /* QueryResponse.swift */; };
 		A417F81B23A66239008B5390 /* pixabay.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A417F81A23A66239008B5390 /* pixabay.jpg */; };
 		A445CD8D239EF0A1000B2ED8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A445CD8C239EF0A1000B2ED8 /* AppDelegate.swift */; };
 		A445CD8F239EF0A1000B2ED8 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A445CD8E239EF0A1000B2ED8 /* SceneDelegate.swift */; };
 		A445CD97239EF0A1000B2ED8 /* PixabayViewer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A445CD95239EF0A1000B2ED8 /* PixabayViewer.xcdatamodeld */; };
 		A445CD99239EF0A2000B2ED8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A445CD98239EF0A2000B2ED8 /* Assets.xcassets */; };
 		A445CD9C239EF0A2000B2ED8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A445CD9A239EF0A2000B2ED8 /* LaunchScreen.storyboard */; };
-		A445CDA7239EF18E000B2ED8 /* PixabayPhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A445CDA6239EF18E000B2ED8 /* PixabayPhotosViewController.swift */; };
-		A445CDAB239EF1E4000B2ED8 /* PixabayPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A445CDAA239EF1E4000B2ED8 /* PixabayPhoto.swift */; };
-		A445CDAD239EF1F7000B2ED8 /* PixabaySearchProcessing.swift in Sources */ = {isa = PBXBuildFile; fileRef = A445CDAC239EF1F7000B2ED8 /* PixabaySearchProcessing.swift */; };
-		A445CDAF239EF20E000B2ED8 /* PixabaySearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = A445CDAE239EF20E000B2ED8 /* PixabaySearchResults.swift */; };
-		A445CDB1239EF21E000B2ED8 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = A445CDB0239EF21E000B2ED8 /* Result.swift */; };
+		A445CDA7239EF18E000B2ED8 /* SearchImagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A445CDA6239EF18E000B2ED8 /* SearchImagesViewController.swift */; };
 		A445CDB5239EF555000B2ED8 /* PixabayPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A445CDB4239EF555000B2ED8 /* PixabayPhotoCell.swift */; };
 		A445CDB9239F04B6000B2ED8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A445CDB8239F04B6000B2ED8 /* Main.storyboard */; };
 		A45AFB3123A414C600DB2FB7 /* Thumbnail+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A45AFB2D23A414C600DB2FB7 /* Thumbnail+CoreDataClass.swift */; };
@@ -33,6 +35,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A40467A224AA310F007B244D /* PixabaySearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabaySearch.swift; sourceTree = "<group>"; };
+		A40467A424AA3137007B244D /* SessionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionError.swift; sourceTree = "<group>"; };
+		A40467A624AA31FC007B244D /* SessionResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionResult.swift; sourceTree = "<group>"; };
+		A40467A924AA33B1007B244D /* PixabayImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayImage.swift; sourceTree = "<group>"; };
+		A40467AB24AA34FB007B244D /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
+		A40467AD24AA91CA007B244D /* QueryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryResponse.swift; sourceTree = "<group>"; };
 		A417F81A23A66239008B5390 /* pixabay.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pixabay.jpg; sourceTree = "<group>"; };
 		A445CD89239EF0A1000B2ED8 /* PixabayViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixabayViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A445CD8C239EF0A1000B2ED8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,11 +49,7 @@
 		A445CD98239EF0A2000B2ED8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A445CD9B239EF0A2000B2ED8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A445CD9D239EF0A2000B2ED8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A445CDA6239EF18E000B2ED8 /* PixabayPhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayPhotosViewController.swift; sourceTree = "<group>"; };
-		A445CDAA239EF1E4000B2ED8 /* PixabayPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayPhoto.swift; sourceTree = "<group>"; };
-		A445CDAC239EF1F7000B2ED8 /* PixabaySearchProcessing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabaySearchProcessing.swift; sourceTree = "<group>"; };
-		A445CDAE239EF20E000B2ED8 /* PixabaySearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabaySearchResults.swift; sourceTree = "<group>"; };
-		A445CDB0239EF21E000B2ED8 /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		A445CDA6239EF18E000B2ED8 /* SearchImagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchImagesViewController.swift; sourceTree = "<group>"; };
 		A445CDB4239EF555000B2ED8 /* PixabayPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayPhotoCell.swift; sourceTree = "<group>"; };
 		A445CDB8239F04B6000B2ED8 /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A45AFB2D23A414C600DB2FB7 /* Thumbnail+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Thumbnail+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -80,6 +84,26 @@
 			path = Assets;
 			sourceTree = "<group>";
 		};
+		A40467A124AA30D1007B244D /* Server */ = {
+			isa = PBXGroup;
+			children = (
+				A40467A224AA310F007B244D /* PixabaySearch.swift */,
+				A40467A424AA3137007B244D /* SessionError.swift */,
+				A40467A624AA31FC007B244D /* SessionResult.swift */,
+			);
+			path = Server;
+			sourceTree = "<group>";
+		};
+		A40467A824AA339A007B244D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A40467AB24AA34FB007B244D /* Globals.swift */,
+				A40467A924AA33B1007B244D /* PixabayImage.swift */,
+				A40467AD24AA91CA007B244D /* QueryResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		A445CD80239EF0A1000B2ED8 = {
 			isa = PBXGroup;
 			children = (
@@ -99,13 +123,13 @@
 		A445CD8B239EF0A1000B2ED8 /* PixabayViewer */ = {
 			isa = PBXGroup;
 			children = (
-				A445CDA9239EF1BE000B2ED8 /* Pixabay Models */,
+				A40467A824AA339A007B244D /* Models */,
+				A40467A124AA30D1007B244D /* Server */,
 				A445CDA5239EF117000B2ED8 /* View */,
 				A445CDA8239EF19E000B2ED8 /* Controllers */,
-				A47BBBE823A2EFDE00266713 /* Cells */,
 				A45AFB3523A414D500DB2FB7 /* CoreData */,
 				A445CDA3239EF0B3000B2ED8 /* AppDelegates */,
-				A445CDA4239EF0F6000B2ED8 /* Property Lists */,
+				A445CD9D239EF0A2000B2ED8 /* Info.plist */,
 				A445CD98239EF0A2000B2ED8 /* Assets.xcassets */,
 				A40467A024AA2D6D007B244D /* Assets */,
 			);
@@ -121,17 +145,10 @@
 			path = AppDelegates;
 			sourceTree = "<group>";
 		};
-		A445CDA4239EF0F6000B2ED8 /* Property Lists */ = {
-			isa = PBXGroup;
-			children = (
-				A445CD9D239EF0A2000B2ED8 /* Info.plist */,
-			);
-			path = "Property Lists";
-			sourceTree = "<group>";
-		};
 		A445CDA5239EF117000B2ED8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				A47BBBE823A2EFDE00266713 /* Cells */,
 				A445CD9A239EF0A2000B2ED8 /* LaunchScreen.storyboard */,
 				A445CDB8239F04B6000B2ED8 /* Main.storyboard */,
 				A4C2D66823A695A400FEC415 /* PixabayPhotoHeaderView.swift */,
@@ -142,22 +159,11 @@
 		A445CDA8239EF19E000B2ED8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A445CDA6239EF18E000B2ED8 /* PixabayPhotosViewController.swift */,
+				A445CDA6239EF18E000B2ED8 /* SearchImagesViewController.swift */,
 				A47BBBE623A2ED3300266713 /* FullScreenViewController.swift */,
 				A467CA4A23A6F1AC00CC945D /* Extensions */,
 			);
 			path = Controllers;
-			sourceTree = "<group>";
-		};
-		A445CDA9239EF1BE000B2ED8 /* Pixabay Models */ = {
-			isa = PBXGroup;
-			children = (
-				A445CDAA239EF1E4000B2ED8 /* PixabayPhoto.swift */,
-				A445CDAC239EF1F7000B2ED8 /* PixabaySearchProcessing.swift */,
-				A445CDAE239EF20E000B2ED8 /* PixabaySearchResults.swift */,
-				A445CDB0239EF21E000B2ED8 /* Result.swift */,
-			);
-			path = "Pixabay Models";
 			sourceTree = "<group>";
 		};
 		A45AFB3523A414D500DB2FB7 /* CoreData */ = {
@@ -269,16 +275,18 @@
 				A467CA4923A6F0AF00CC945D /* SavingAndLoadingExtention.swift in Sources */,
 				A445CD8D239EF0A1000B2ED8 /* AppDelegate.swift in Sources */,
 				A4C2D66923A695A400FEC415 /* PixabayPhotoHeaderView.swift in Sources */,
+				A40467A724AA31FC007B244D /* SessionResult.swift in Sources */,
 				A45AFB3223A414C600DB2FB7 /* Thumbnail+CoreDataProperties.swift in Sources */,
 				A47BBBEF23A2FB6E00266713 /* FullScreenPhotoCell.swift in Sources */,
-				A445CDAD239EF1F7000B2ED8 /* PixabaySearchProcessing.swift in Sources */,
-				A445CDAF239EF20E000B2ED8 /* PixabaySearchResults.swift in Sources */,
+				A40467A524AA3137007B244D /* SessionError.swift in Sources */,
 				A445CD97239EF0A1000B2ED8 /* PixabayViewer.xcdatamodeld in Sources */,
 				A47BBBE723A2ED3300266713 /* FullScreenViewController.swift in Sources */,
+				A40467AE24AA91CA007B244D /* QueryResponse.swift in Sources */,
 				A45AFB3423A414C600DB2FB7 /* FullSize+CoreDataProperties.swift in Sources */,
-				A445CDA7239EF18E000B2ED8 /* PixabayPhotosViewController.swift in Sources */,
-				A445CDAB239EF1E4000B2ED8 /* PixabayPhoto.swift in Sources */,
-				A445CDB1239EF21E000B2ED8 /* Result.swift in Sources */,
+				A40467A324AA310F007B244D /* PixabaySearch.swift in Sources */,
+				A445CDA7239EF18E000B2ED8 /* SearchImagesViewController.swift in Sources */,
+				A40467AC24AA34FB007B244D /* Globals.swift in Sources */,
+				A40467AA24AA33B1007B244D /* PixabayImage.swift in Sources */,
 				A445CD8F239EF0A1000B2ED8 /* SceneDelegate.swift in Sources */,
 				A45AFB3323A414C600DB2FB7 /* FullSize+CoreDataClass.swift in Sources */,
 			);
@@ -418,7 +426,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N8U99CLXJ5;
-				INFOPLIST_FILE = "PixabayViewer/Property Lists/Info.plist";
+				INFOPLIST_FILE = PixabayViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -436,7 +444,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N8U99CLXJ5;
-				INFOPLIST_FILE = "PixabayViewer/Property Lists/Info.plist";
+				INFOPLIST_FILE = PixabayViewer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -9,11 +9,17 @@
 import UIKit
 
 class FullScreenViewController: UIViewController {
+    
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var likes: UIBarButtonItem!
     @IBOutlet weak var favorites: UIBarButtonItem!
     @IBOutlet weak var views: UIBarButtonItem!
     @IBOutlet weak var header: UINavigationItem!
+    
+    private let reuseIdentifier = "FullScreenCell"
+    //var pixabayPhoto: PixabayPhoto!
+    var pixabayPhotos = [PixabayImage]()
+    var indexPath: IndexPath!
     
     //MARK:- Share Pictures
     @IBAction func shareButtonPressed(_ sender: UIBarButtonItem) {
@@ -27,11 +33,6 @@ class FullScreenViewController: UIViewController {
             }
         }
     }
-    
-    private let reuseIdentifier = "FullScreenCell"
-    //var pixabayPhoto: PixabayPhoto!
-    var pixabayPhotos: PixabaySearchResults!
-    var indexPath: IndexPath!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,20 +55,17 @@ class FullScreenViewController: UIViewController {
 //MARK:- Collection View Delegate
 extension FullScreenViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pixabayPhotos.searchResults.count
+        return pixabayPhotos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FullScreenPhotoCell
-        //let image = pixabayPhotos.searchResults[indexPath.item].image!
-        let targetSize = CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
-        let searchResult = pixabayPhotos.searchResults[indexPath.row]
-        cell.imageView.image = searchResult.image!.resizeImage(targetSize: targetSize)
-        //print("image size = ", cell.imageView.image!.size)
-        likes.title = String(searchResult.likes)
-        favorites.title = String(searchResult.favorites)
-        views.title = String(searchResult.views)
-        header.title = "\(indexPath.row) of \(pixabayPhotos.searchResults.count)"
+
+        let pbImage = pixabayPhotos[indexPath.row]
+        likes.title = "\(pbImage.likes)"
+        favorites.title = String(pbImage.favorites)
+        views.title = String(pbImage.views)
+        header.title = "\(indexPath.row) of \(pixabayPhotos.count)"
         return cell
     }
     
