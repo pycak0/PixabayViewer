@@ -29,8 +29,8 @@ class PixabaySearchProcessing {
         if numberOfImgs > 40 {
             orientation = "vertical"
         }
-        let query = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
-        let searchURL = "https://pixabay.com/api/?key=\(apiKey)&q=\(query!)&image_type=all&orientation=\(orientation)&per_page=\(numberOfImgs*k)"
+        let request = query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        let searchURL = "https://pixabay.com/api/?key=\(apiKey)&q=\(request!)&image_type=all&orientation=\(orientation)&per_page=\(numberOfImgs*k)"
         print(searchURL)
         
         //let searchRequest = URLRequest(url: URL(string: searchURL)!)
@@ -149,7 +149,7 @@ class PixabaySearchProcessing {
                 }
                 */
                             
-                let searchResults = PixabaySearchResults(query: query!, searchResults: pixabayPhotos)
+                let searchResults = PixabaySearchResults(query: query, searchResults: pixabayPhotos)
                 DispatchQueue.main.async {
                     completion(Result.results(searchResults))
                 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oAR-PR-v8A">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oAR-PR-v8A">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,7 +24,7 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="hP1-hf-J67">
+                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" id="hP1-hf-J67">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="774"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
@@ -58,16 +58,16 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncW-dd-SlG">
-                                            <rect key="frame" x="12" y="8" width="394" height="19"/>
+                                            <rect key="frame" x="22" y="8" width="384" height="19"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="ncW-dd-SlG" firstAttribute="leading" secondItem="eVc-0b-eYg" secondAttribute="leadingMargin" constant="14" id="9UZ-V9-XjK"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="ncW-dd-SlG" secondAttribute="bottom" id="Sax-Yq-Ktb"/>
                                         <constraint firstItem="ncW-dd-SlG" firstAttribute="top" secondItem="eVc-0b-eYg" secondAttribute="topMargin" id="Sj3-RS-e74"/>
-                                        <constraint firstItem="ncW-dd-SlG" firstAttribute="leading" secondItem="eVc-0b-eYg" secondAttribute="leadingMargin" constant="4" id="SoV-ID-kFJ"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="ncW-dd-SlG" secondAttribute="trailing" id="tWL-XY-P8Y"/>
                                     </constraints>
                                     <connections>
@@ -96,7 +96,7 @@
             </objects>
             <point key="canvasLocation" x="816" y="3"/>
         </scene>
-        <!--Full Screen View Controller-->
+        <!--1 of 1-->
         <scene sceneID="KSH-Cn-f44">
             <objects>
                 <viewController storyboardIdentifier="FullScreenViewController" id="ta9-C4-9rC" customClass="FullScreenViewController" customModule="PixabayViewer" customModuleProvider="target" sceneMemberID="viewController">
@@ -108,34 +108,35 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="bql-yC-fiN">
-                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="itemSize" width="411" height="722"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="FullScreenCell" id="ZFi-9Y-NdC" customClass="FullScreenPhotoCell" customModule="PixabayViewer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="26" width="411" height="722"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="411" height="722"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
+                                        <size key="customSize" width="411" height="722"/>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uwK-jx-YRJ">
                                 <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
-                                    <barButtonItem title="Icon" image="heart" catalog="system" style="done" id="7bs-7f-DWd" userLabel="Heart"/>
+                                    <barButtonItem title="Icon" image="heart" catalog="system" id="7bs-7f-DWd" userLabel="Heart"/>
                                     <barButtonItem enabled="NO" title="-0-" style="done" id="vPi-u9-Xg0">
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </barButtonItem>
-                                    <barButtonItem image="star" catalog="system" style="done" id="Yjb-bv-xdB" userLabel="Star"/>
+                                    <barButtonItem image="star" catalog="system" id="Yjb-bv-xdB" userLabel="Star"/>
                                     <barButtonItem enabled="NO" title="-0-" style="done" id="5aw-1X-4GC" userLabel="Favorites">
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </barButtonItem>
-                                    <barButtonItem title="Item" image="eye" catalog="system" style="done" id="84c-Ch-7q6" userLabel="Eye"/>
+                                    <barButtonItem title="Item" image="eye" catalog="system" id="84c-Ch-7q6" userLabel="Eye"/>
                                     <barButtonItem enabled="NO" title="-0-" style="done" id="pCx-X6-HGx">
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </barButtonItem>
@@ -161,17 +162,18 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iFA-fo-q7O"/>
                     </view>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="qDo-aq-FG2"/>
+                    <navigationItem key="navigationItem" title="1 of 1" largeTitleDisplayMode="never" id="qDo-aq-FG2"/>
                     <connections>
                         <outlet property="collectionView" destination="sJj-ay-9PK" id="GHu-Xd-6EH"/>
                         <outlet property="favorites" destination="5aw-1X-4GC" id="UIQ-ea-mKI"/>
+                        <outlet property="header" destination="qDo-aq-FG2" id="ese-gq-Z4e"/>
                         <outlet property="likes" destination="vPi-u9-Xg0" id="n0q-T0-UzM"/>
                         <outlet property="views" destination="pCx-X6-HGx" id="iYx-SW-spw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aev-Rl-PUK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1619" y="3"/>
+            <point key="canvasLocation" x="1618.840579710145" y="2.6785714285714284"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Xa1-x7-oi4">
@@ -196,8 +198,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="eye" catalog="system" width="64" height="40"/>
-        <image name="heart" catalog="system" width="64" height="54"/>
-        <image name="star" catalog="system" width="64" height="58"/>
+        <image name="eye" catalog="system" width="128" height="81"/>
+        <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="star" catalog="system" width="128" height="116"/>
     </resources>
 </document>

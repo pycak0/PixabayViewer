@@ -20,10 +20,12 @@ class FullScreenPhotoCell: UICollectionViewCell, UIScrollViewDelegate {
         self.scrollView.delegate = self
         self.scrollView.minimumZoomScale = 1.0
         self.scrollView.maximumZoomScale = 3.5
+        
         self.scrollView.isUserInteractionEnabled = true
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(handleDoubleTap(recognizer:)))
         doubleTap.numberOfTapsRequired = 2
         self.scrollView.addGestureRecognizer(doubleTap)
+        
         self.scrollView.showsVerticalScrollIndicator = false
         self.scrollView.showsHorizontalScrollIndicator = false
     }

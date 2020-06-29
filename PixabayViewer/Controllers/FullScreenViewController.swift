@@ -13,8 +13,9 @@ class FullScreenViewController: UIViewController {
     @IBOutlet weak var likes: UIBarButtonItem!
     @IBOutlet weak var favorites: UIBarButtonItem!
     @IBOutlet weak var views: UIBarButtonItem!
+    @IBOutlet weak var header: UINavigationItem!
     
-    
+    //MARK:- Share Pictures
     @IBAction func shareButtonPressed(_ sender: UIBarButtonItem) {
         if let indexPath = collectionView.indexPathsForVisibleItems.last {
             let cell = collectionView?.cellForItem(at: indexPath) as! FullScreenPhotoCell
@@ -41,7 +42,9 @@ class FullScreenViewController: UIViewController {
         
         collectionView.performBatchUpdates(nil) { (result) in
             self.collectionView.scrollToItem(at: self.indexPath, at: .centeredHorizontally, animated: false)
+            //self.header.title = "\(self.indexPath.row + 1) of \(self.pixabayPhotos.searchResults.count)"
         }
+        //header.title = ""
     }
     
     
@@ -58,12 +61,13 @@ extension FullScreenViewController: UICollectionViewDelegate, UICollectionViewDa
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FullScreenPhotoCell
         //let image = pixabayPhotos.searchResults[indexPath.item].image!
         let targetSize = CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
-        let searchResult = pixabayPhotos.searchResults[indexPath.item]
+        let searchResult = pixabayPhotos.searchResults[indexPath.row]
         cell.imageView.image = searchResult.image!.resizeImage(targetSize: targetSize)
         //print("image size = ", cell.imageView.image!.size)
         likes.title = String(searchResult.likes)
         favorites.title = String(searchResult.favorites)
         views.title = String(searchResult.views)
+        header.title = "\(indexPath.row) of \(pixabayPhotos.searchResults.count)"
         return cell
     }
     
@@ -82,4 +86,3 @@ extension FullScreenViewController: UICollectionViewDelegateFlowLayout {
     }
     
 }
-
