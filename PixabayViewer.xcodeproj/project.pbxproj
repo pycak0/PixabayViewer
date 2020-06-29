@@ -71,6 +71,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A40467A024AA2D6D007B244D /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				A417F81A23A66239008B5390 /* pixabay.jpg */,
+				A4C2D66423A6757100FEC415 /* bigicon.jpg */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
 		A445CD80239EF0A1000B2ED8 = {
 			isa = PBXGroup;
 			children = (
@@ -90,8 +99,6 @@
 		A445CD8B239EF0A1000B2ED8 /* PixabayViewer */ = {
 			isa = PBXGroup;
 			children = (
-				A417F81A23A66239008B5390 /* pixabay.jpg */,
-				A4C2D66423A6757100FEC415 /* bigicon.jpg */,
 				A445CDA9239EF1BE000B2ED8 /* Pixabay Models */,
 				A445CDA5239EF117000B2ED8 /* View */,
 				A445CDA8239EF19E000B2ED8 /* Controllers */,
@@ -100,6 +107,7 @@
 				A445CDA3239EF0B3000B2ED8 /* AppDelegates */,
 				A445CDA4239EF0F6000B2ED8 /* Property Lists */,
 				A445CD98239EF0A2000B2ED8 /* Assets.xcassets */,
+				A40467A024AA2D6D007B244D /* Assets */,
 			);
 			path = PixabayViewer;
 			sourceTree = "<group>";
