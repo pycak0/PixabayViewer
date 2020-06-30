@@ -1,5 +1,5 @@
 //
-//  FullScreenViewController.swift
+//  DetailViewController.swift
 //  PixabayViewer
 //
 //  Created by Владислав on 13.12.2019.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FullScreenViewController: UIViewController {
+class DetailViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var likes: UIBarButtonItem!
@@ -53,7 +53,7 @@ class FullScreenViewController: UIViewController {
 }
 
 //MARK:- Collection View Delegate
-extension FullScreenViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pixabayPhotos.count
     }
@@ -73,7 +73,7 @@ extension FullScreenViewController: UICollectionViewDelegate, UICollectionViewDa
 
 
 // MARK: - Flow Layout Delegate
-extension FullScreenViewController: UICollectionViewDelegateFlowLayout {
+extension DetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let frameCV = view.frame
         let widthOfCell = frameCV.width

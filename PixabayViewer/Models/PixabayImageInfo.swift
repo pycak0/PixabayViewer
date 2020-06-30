@@ -8,6 +8,7 @@
 
 import Foundation
 
+///A struct to use mainly in server requests
 struct PixabayImageInfo: Hashable, Decodable {
     private var previewURL: String?
     private var imageURL: String?
@@ -16,6 +17,19 @@ struct PixabayImageInfo: Hashable, Decodable {
     var likes: Int = 0
     var favorites: Int = 0
     var views: Int = 0
+    
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: PixabayImageInfo, rhs: PixabayImageInfo) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+//MARK:- URL public properties
+extension PixabayImageInfo {
     
     var thumbnailUrl: URL? {
         return URL(string: previewURL ?? "")
@@ -28,11 +42,4 @@ struct PixabayImageInfo: Hashable, Decodable {
         return URL(string: webformatURL ?? "")
     }
     
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    static func == (lhs: PixabayImageInfo, rhs: PixabayImageInfo) -> Bool {
-        return lhs.id == rhs.id
-    }
 }

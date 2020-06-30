@@ -23,13 +23,30 @@ class PixabaySearch {
         session.invalidateAndCancel()
     }
     
-    //MARK:- Get Images List
-    func getImages(query: String, amount: Int = 25, completion: @escaping ((SessionResult<[PixabayImageInfo]>) -> Void)) {
+    enum RequestType {
+        case editorsChoice, query(String)
+        
+        func queryItems(numberOfImages amount: Int, pageNumber: Int) -> [URLQueryItem] {
+            var items = [
+                URLQueryItem(name: "per_page", value: "\(amount)"),
+                URLQueryItem(name: "page", value: "\(pageNumber)")
+            ]
+            switch self {
+            case let .query(text):
+                items.append(URLQueryItem(name: "q", value: text))
+            case .editorsChoice:
+                items.append(URLQueryItem(name: "editors_choice", value: "true"))
+            }
+            return items
+        }
+        
+    }
+    
+    //MARK:- Get Images by Query
+    func getImages(_ requestType: RequestType, amount: Int = 25, pageNumber: Int = 1, completion: @escaping ((SessionResult<[PixabayImageInfo]>) -> Void)) {
         var imagesUrlComponents = Globals.baseUrlComponent
-        imagesUrlComponents.queryItems?.append(contentsOf: [
-            URLQueryItem(name: "q", value: query),
-            URLQueryItem(name: "per_page", value: "\(amount)")
-        ])
+        imagesUrlComponents.queryItems?.append(
+            contentsOf: requestType.queryItems(numberOfImages: amount, pageNumber: pageNumber))
         
         guard let url = imagesUrlComponents.url else {
             completion(.error(.urlError))

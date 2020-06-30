@@ -38,8 +38,8 @@ extension ImageSearchViewController {
             }
             
             var text = "No images searched recently"
-            if self.imageItems.count != 0 {
-                text = "Found \(self.imageItems.count) matching your query"
+            if self.imageItems.count != 0, let query = self.lastQueryText {
+                text = "Search results matching '\(query)'"
             }
             headerView.label.text = text
             return headerView

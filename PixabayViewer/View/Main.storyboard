@@ -34,6 +34,7 @@
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WOd-DS-DXh">
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                                    <color key="backgroundColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <gestureRecognizers/>
                                                 </imageView>
                                             </subviews>
@@ -54,14 +55,14 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncW-dd-SlG">
-                                            <rect key="frame" x="22" y="8" width="384" height="19"/>
+                                            <rect key="frame" x="8" y="8" width="398" height="19"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="ncW-dd-SlG" firstAttribute="leading" secondItem="eVc-0b-eYg" secondAttribute="leadingMargin" constant="14" id="9UZ-V9-XjK"/>
+                                        <constraint firstItem="ncW-dd-SlG" firstAttribute="leading" secondItem="eVc-0b-eYg" secondAttribute="leadingMargin" id="9UZ-V9-XjK"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="ncW-dd-SlG" secondAttribute="bottom" id="Sax-Yq-Ktb"/>
                                         <constraint firstItem="ncW-dd-SlG" firstAttribute="top" secondItem="eVc-0b-eYg" secondAttribute="topMargin" id="Sj3-RS-e74"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="ncW-dd-SlG" secondAttribute="trailing" id="tWL-XY-P8Y"/>
@@ -104,7 +105,7 @@
         <!--1 of 1-->
         <scene sceneID="KSH-Cn-f44">
             <objects>
-                <viewController storyboardIdentifier="FullScreenViewController" id="ta9-C4-9rC" customClass="FullScreenViewController" customModule="PixabayViewer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FullScreenViewController" id="ta9-C4-9rC" customClass="DetailViewController" customModule="PixabayViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aoA-hX-4F9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -185,8 +186,8 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oAR-PR-v8A" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="ab6-po-B6u">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ab6-po-B6u">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

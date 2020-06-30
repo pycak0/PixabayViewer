@@ -8,6 +8,7 @@
 
 import UIKit
 
+///An item to use mainly in collection view
 struct PixabayImageItem: Hashable {
     var info: PixabayImageInfo
     var image: UIImage?

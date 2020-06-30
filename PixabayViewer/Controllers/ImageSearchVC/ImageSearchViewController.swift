@@ -20,6 +20,7 @@ class ImageSearchViewController: UIViewController {
     var dataSource: UICollectionViewDiffableDataSource<Section, PixabayImageItem>!
     
     private var searchButtonIsSelected = false
+    var lastQueryText: String?
     var imageItems = [PixabayImageItem]()
 
     //var savedImagesData: [URL] = []
@@ -32,10 +33,12 @@ class ImageSearchViewController: UIViewController {
     }
     
     //MARK:- Fetch Images
-    func fetchImages(query: String) {
-        //clearCollectionView()
+    func fetchImages(query: String?) {
+        guard let text = query else {
+            return
+        }
         setLoadingIndicator(enabled: true)
-        PixabaySearch.shared.getImages(query: query) { (sessionResult) in
+        PixabaySearch.shared.getImages(.query(text), amount: 100) { (sessionResult) in
             self.setLoadingIndicator(enabled: false)
             switch sessionResult {
             case let .error(error):
@@ -63,7 +66,7 @@ class ImageSearchViewController: UIViewController {
 
 private extension ImageSearchViewController {
     //MARK:- Configure Views
-    func configureViews() {        
+    func configureViews() {
         configureSearchController()
     }
     
@@ -79,20 +82,13 @@ private extension ImageSearchViewController {
     }
     
     func setLoadingIndicator(enabled: Bool) {
-        enabled ?
-            activityIndicator.startAnimating()
-        :   activityIndicator.stopAnimating()
-    }
-    
-    func clearCollectionView() {
-        self.imageItems.removeAll()
-        //self.savedImagesData = []
-        self.collectionView.reloadData()
+        enabled ? activityIndicator.startAnimating() :
+            activityIndicator.stopAnimating()
     }
 }
 
 //MARK:- Search Controller Delegate
-extension ImageSearchViewController: UISearchResultsUpdating, UISearchBarDelegate {
+extension ImageSearchViewController: UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
 //        let text = searchController.searchBar.text!
@@ -102,8 +98,8 @@ extension ImageSearchViewController: UISearchResultsUpdating, UISearchBarDelegat
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let q = searchBar.text!
-        fetchImages(query: q)
+        lastQueryText = searchBar.text?.trimmingCharacters(in: .whitespaces)
+        fetchImages(query: lastQueryText)
 //        searchButtonIsSelected = true
 //        updateSearchResults(for: navigationItem.searchController!)
 //        searchButtonIsSelected = false
