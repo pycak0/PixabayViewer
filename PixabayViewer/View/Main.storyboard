@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="oAR-PR-v8A">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -11,11 +12,11 @@
             <objects>
                 <viewController id="RRF-ni-jRs" customClass="ImageSearchViewController" customModule="PixabayViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CXU-5B-oy8">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uJN-ED-0eL">
-                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="interactive" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="uJN-ED-0eL">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="6Vc-zU-box">
                                     <size key="itemSize" width="200" height="200"/>
@@ -23,10 +24,6 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" id="hP1-hf-J67">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                </activityIndicatorView>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PixabayCell" id="ioo-Tl-1VJ" customClass="PixabayPhotoCell" customModule="PixabayViewer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="35" width="200" height="200"/>
@@ -35,7 +32,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WOd-DS-DXh">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WOd-DS-DXh">
                                                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                                                     <gestureRecognizers/>
                                                 </imageView>
@@ -53,11 +50,11 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="PixabayPhotoHeaderView" id="eVc-0b-eYg" customClass="PixabayPhotoHeaderView" customModule="PixabayViewer" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="35"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="35"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ncW-dd-SlG">
-                                            <rect key="frame" x="22" y="8" width="570" height="19"/>
+                                            <rect key="frame" x="22" y="8" width="384" height="19"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -74,12 +71,21 @@
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="hP1-hf-J67">
+                                <rect key="frame" x="182" y="450" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="hP1-hf-J67" secondAttribute="height" multiplier="1:1" id="Fzd-cB-3b1"/>
+                                    <constraint firstAttribute="width" constant="50" id="O4b-UU-anU"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="hP1-hf-J67" firstAttribute="centerY" secondItem="lnC-Ow-NBk" secondAttribute="centerY" id="6Dd-Ds-bJJ"/>
                             <constraint firstItem="uJN-ED-0eL" firstAttribute="top" secondItem="lnC-Ow-NBk" secondAttribute="top" id="W1x-nw-nVu"/>
                             <constraint firstItem="uJN-ED-0eL" firstAttribute="leading" secondItem="lnC-Ow-NBk" secondAttribute="leading" id="Zrs-TV-c0D"/>
-                            <constraint firstItem="uJN-ED-0eL" firstAttribute="bottom" secondItem="lnC-Ow-NBk" secondAttribute="bottom" id="jon-9x-cbk"/>
+                            <constraint firstItem="uJN-ED-0eL" firstAttribute="bottom" secondItem="CXU-5B-oy8" secondAttribute="bottom" id="jon-9x-cbk"/>
+                            <constraint firstItem="hP1-hf-J67" firstAttribute="centerX" secondItem="lnC-Ow-NBk" secondAttribute="centerX" id="vGu-cJ-gdz"/>
                             <constraint firstItem="uJN-ED-0eL" firstAttribute="trailing" secondItem="lnC-Ow-NBk" secondAttribute="trailing" id="xPR-dr-laV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="lnC-Ow-NBk"/>
@@ -88,7 +94,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="hP1-hf-J67" id="SZ4-wc-dWB"/>
                         <outlet property="collectionView" destination="uJN-ED-0eL" id="gtn-Vl-7gS"/>
-                        <segue destination="ta9-C4-9rC" kind="show" id="f2p-bj-tBj"/>
+                        <segue destination="ta9-C4-9rC" kind="show" identifier="Show Detailed Image" id="f2p-bj-tBj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="You-bc-fck" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -100,11 +106,11 @@
             <objects>
                 <viewController storyboardIdentifier="FullScreenViewController" id="ta9-C4-9rC" customClass="FullScreenViewController" customModule="PixabayViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aoA-hX-4F9">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sJj-ay-9PK">
-                                <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="bql-yC-fiN">
                                     <size key="itemSize" width="411" height="722"/>
@@ -114,7 +120,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="FullScreenCell" id="ZFi-9Y-NdC" customClass="FullScreenPhotoCell" customModule="PixabayViewer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="-86" width="411" height="722"/>
+                                        <rect key="frame" x="0.0" y="26" width="411" height="722"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="411" height="722"/>
@@ -125,7 +131,7 @@
                                 </cells>
                             </collectionView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uwK-jx-YRJ">
-                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
                                 <items>
                                     <barButtonItem title="Icon" image="heart" catalog="system" id="7bs-7f-DWd" userLabel="Heart"/>
                                     <barButtonItem enabled="NO" title="-0-" style="done" id="vPi-u9-Xg0">
@@ -185,7 +191,6 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dta-Nm-Guf">
-                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </toolbar>
                     <connections>

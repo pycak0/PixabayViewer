@@ -26,9 +26,9 @@ class ImageSearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureSearchController()
-        configureViews()
+        configureCollectionView()
         configureDataSource()
+        configureViews()
     }
     
     //MARK:- Fetch Images
@@ -62,6 +62,10 @@ class ImageSearchViewController: UIViewController {
 }
 
 private extension ImageSearchViewController {
+    //MARK:- Configure Views
+    func configureViews() {        
+        configureSearchController()
+    }
     
     func configureSearchController() {
         let searchController = UISearchController(searchResultsController: nil)
@@ -74,17 +78,10 @@ private extension ImageSearchViewController {
         self.navigationItem.searchController = searchController
     }
     
-    func configureViews() {
-        collectionView.delegate = self
-        
-        activityIndicator.hidesWhenStopped = true
-        setLoadingIndicator(enabled: false)
-    }
-    
     func setLoadingIndicator(enabled: Bool) {
         enabled ?
-            activityIndicator.startAnimating() :
-            activityIndicator.stopAnimating()
+            activityIndicator.startAnimating()
+        :   activityIndicator.stopAnimating()
     }
     
     func clearCollectionView() {
