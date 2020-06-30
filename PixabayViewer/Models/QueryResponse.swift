@@ -11,5 +11,5 @@ import Foundation
 class QueryResponse: Decodable {
     var total: Int = 0
     var totalHits: Int = 0
-    var hits: [PixabayImage]?
+    var hits: [PixabayImageInfo]?
 }

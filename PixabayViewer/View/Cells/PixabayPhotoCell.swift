@@ -9,5 +9,7 @@
 import UIKit
 
 class PixabayPhotoCell: UICollectionViewCell {
+    static let reuseIdentifier = "PixabayCell"
+    
     @IBOutlet weak var imageView: UIImageView!
 }

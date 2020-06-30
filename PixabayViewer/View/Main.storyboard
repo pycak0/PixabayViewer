@@ -9,7 +9,7 @@
         <!--PixabayViewer-->
         <scene sceneID="AqZ-V4-dfT">
             <objects>
-                <viewController id="RRF-ni-jRs" customClass="SearchImagesViewController" customModule="PixabayViewer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="RRF-ni-jRs" customClass="ImageSearchViewController" customModule="PixabayViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CXU-5B-oy8">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -24,7 +24,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" id="hP1-hf-J67">
-                                    <rect key="frame" x="0.0" y="-6" width="600" height="556"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="556"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
                                 <cells>

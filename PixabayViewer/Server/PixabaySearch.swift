@@ -24,7 +24,7 @@ class PixabaySearch {
     }
     
     //MARK:- Get Images List
-    func getImages(query: String, amount: Int = 25, completion: @escaping ((SessionResult<[PixabayImage]>) -> Void)) {
+    func getImages(query: String, amount: Int = 25, completion: @escaping ((SessionResult<[PixabayImageInfo]>) -> Void)) {
         var imagesUrlComponents = Globals.baseUrlComponent
         imagesUrlComponents.queryItems?.append(contentsOf: [
             URLQueryItem(name: "q", value: query),

@@ -9,5 +9,7 @@
 import UIKit
 
 class PixabayPhotoHeaderView: UICollectionReusableView {
+    static let reuseIndentifier = "PixabayPhotoHeaderView"
+    
     @IBOutlet weak var label: UILabel!
 }

@@ -18,7 +18,7 @@ class FullScreenViewController: UIViewController {
     
     private let reuseIdentifier = "FullScreenCell"
     //var pixabayPhoto: PixabayPhoto!
-    var pixabayPhotos = [PixabayImage]()
+    var pixabayPhotos = [PixabayImageInfo]()
     var indexPath: IndexPath!
     
     //MARK:- Share Pictures
