@@ -1,5 +1,5 @@
 //
-//  PixabayImageItem.swift
+//MARK:  PixabayImageItem.swift
 //  PixabayViewer
 //
 //  Created by Владислав on 30.06.2020.
@@ -9,9 +9,10 @@
 import UIKit
 
 ///An item to use mainly in collection view
-struct PixabayImageItem: Hashable {
+struct PixabayImageItem {
     var info: PixabayImageInfo
     var image: UIImage?
+    var loadingId: UUID?
     
     init(info: PixabayImageInfo, image: UIImage?) {
         self.info = info
@@ -22,7 +23,10 @@ struct PixabayImageItem: Hashable {
         self.info = info
         self.image = nil
     }
-    
+}
+
+//MARK:- Hashable
+extension PixabayImageItem: Hashable {
     func hash(into hasher: inout Hasher) {
         hasher.combine(info.id)
     }

@@ -10,17 +10,34 @@ import UIKit
 
 class PixabaySearch {
     
+    struct TaskResult<T> {
+        var object: T?
+        var taskId: UUID?
+        
+        func cancel() {
+            guard let id = taskId else {
+                return
+            }
+            shared.cancelTask(with: id)
+        }
+    }
+    
     static var shared = PixabaySearch()
         
     private var session = URLSession(configuration: .default)
-    private var lastActiveTask: URLSessionTask?
+    private var runningTasks: Dictionary<UUID, URLSessionTask>? = [UUID : URLSessionTask]()
     
-    func cancelLastActiveTask() {
-        lastActiveTask?.cancel()
+    func cancelTask(with id: UUID?) {
+        guard let id = id else {
+            return
+        }
+        runningTasks?[id]?.cancel()
+        runningTasks?.removeValue(forKey: id)
     }
     
     func cancelAllTasks() {
-        session.invalidateAndCancel()
+        runningTasks?.values.forEach { $0.cancel() }
+        runningTasks?.removeAll()
     }
     
     enum RequestType {
@@ -43,17 +60,20 @@ class PixabaySearch {
     }
     
     //MARK:- Get Images by Query
-    func getImages(_ requestType: RequestType, amount: Int = 25, pageNumber: Int = 1, completion: @escaping ((SessionResult<[PixabayImageInfo]>) -> Void)) {
+    func getImages(_ requestType: RequestType, amount: Int = 25, pageNumber: Int = 1, completion: @escaping ((SessionResult<[PixabayImageInfo]>) -> Void)) -> UUID? {
         var imagesUrlComponents = Globals.baseUrlComponent
         imagesUrlComponents.queryItems?.append(
             contentsOf: requestType.queryItems(numberOfImages: amount, pageNumber: pageNumber))
         
         guard let url = imagesUrlComponents.url else {
             completion(.error(.urlError))
-            return
+            return nil
         }
         
-        lastActiveTask = session.dataTask(with: url) { (data, response, error) in
+        let taskId = UUID()
+        let task = session.dataTask(with: url) { (data, response, error) in
+            defer { self.runningTasks?.removeValue(forKey: taskId) }
+            
             if let error = error {
                 DispatchQueue.main.async {
                     completion(.error(.local(error)))
@@ -82,19 +102,28 @@ class PixabaySearch {
             }
             
         }
-        lastActiveTask?.resume()
+        task.resume()
+        runningTasks?[taskId] = task
         
+        return taskId
+                
     }
     
     
     //MARK:- Get UIImage
-    func getImage(with imageUrl: URL?, completion: @escaping ((UIImage?) -> Void)) {
+    func getImage(with imageUrl: URL?, completion: @escaping ((UIImage?) -> Void)) -> UUID? {
         guard let url = imageUrl else {
-            completion(nil)
-            return
+            DispatchQueue.main.async {
+                print("image url is incorrect")
+                completion(nil)
+            }
+            return nil
         }
         
-        lastActiveTask = session.dataTask(with: url) { (data, response, error) in
+        let taskId = UUID()
+        let task = session.dataTask(with: url) { (data, response, error) in
+            defer { self.runningTasks?.removeValue(forKey: taskId) }
+            
             guard error == nil, (response as? HTTPURLResponse)?.statusCode == 200,
                 let data = data else {
                     DispatchQueue.main.async {
@@ -109,8 +138,10 @@ class PixabaySearch {
             }
             return
         }
-        lastActiveTask?.resume()
+        task.resume()
+        runningTasks?[taskId] = task
         
+        return taskId
     }
     
 }

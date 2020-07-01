@@ -1,35 +1,36 @@
 //
-//MARK:  ImageSearchViewController.swift
+//  ImageSearchCVC.swift
 //  PixabayViewer
 //
-//  Created by Владислав on 10.12.2019.
-//  Copyright © 2019 Владислав. All rights reserved.
+//  Created by Владислав on 01.07.2020.
+//  Copyright © 2020 Владислав. All rights reserved.
 //
 
 import UIKit
 
-class ImageSearchViewController: UIViewController {
+class ImageSearchCVC: UICollectionViewController {
     
     enum Section {
         case main
     }
-
-    @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var dataSource: UICollectionViewDiffableDataSource<Section, PixabayImageItem>!
     
     private var searchButtonIsSelected = false
     var lastQueryText: String?
+    var lastQueryRequest: PixabaySearch.TaskResult<String>?
     var imageItems = [PixabayImageItem]()
-
-    //var savedImagesData: [URL] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        
         configureCollectionView()
         configureDataSource()
         configureViews()
+        
     }
     
     //MARK:- Fetch Images
@@ -37,8 +38,10 @@ class ImageSearchViewController: UIViewController {
         guard let text = query else {
             return
         }
+        lastQueryRequest?.cancel()
+        clearSearchResults()
         setLoadingIndicator(enabled: true)
-        PixabaySearch.shared.getImages(.query(text), amount: 100) { (sessionResult) in
+        let token = PixabaySearch.shared.getImages(.query(text), amount: 100) { (sessionResult) in
             self.setLoadingIndicator(enabled: false)
             switch sessionResult {
             case let .error(error):
@@ -48,23 +51,31 @@ class ImageSearchViewController: UIViewController {
             case let .success(images):
                 self.imageItems = images.map { PixabayImageItem(info: $0, image: nil) }
                 self.updateUI()
-                //self.collectionView.reloadData()
             }
         }
+        lastQueryRequest = PixabaySearch.TaskResult(object: text, taskId: token)
     }
     
-    func loadImage(url: URL?, at index: Int) {
+    func loadImage(url: URL?, for cell: PixabayImageCell, at index: Int) -> UUID? {
         PixabaySearch.shared.getImage(with: url) { (image) in
             self.imageItems[index].image = image
-            if let cell = self.collectionView.cellForItem(at: IndexPath(item: index, section: 0)) as? PixabayPhotoCell {
-                cell.imageView.image = image
-            }
+            self.updateUI()
+//            var updatedSnapshot = self.dataSource.snapshot()
+//            updatedSnapshot.deleteItems(self.imageItems)
+//            updatedSnapshot.appendItems(self.imageItems)
+//            self.dataSource.apply(updatedSnapshot)
         }
+        
+    }
+    
+    func clearSearchResults() {
+        imageItems.removeAll()
+        updateUI(hideHeader: true)
     }
     
 }
 
-private extension ImageSearchViewController {
+private extension ImageSearchCVC {
     //MARK:- Configure Views
     func configureViews() {
         configureSearchController()
@@ -78,47 +89,34 @@ private extension ImageSearchViewController {
         searchController.searchBar.delegate = self
         searchController.searchBar.autocorrectionType = .yes
         
-        self.navigationItem.searchController = searchController
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
     func setLoadingIndicator(enabled: Bool) {
         enabled ? activityIndicator.startAnimating() :
             activityIndicator.stopAnimating()
     }
+    
 }
 
 //MARK:- Search Controller Delegate
-extension ImageSearchViewController: UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
+extension ImageSearchCVC: UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
     
     func updateSearchResults(for searchController: UISearchController) {
-//        let text = searchController.searchBar.text!
-//        if searchButtonIsSelected {
-//            findImages(query: text)
-//        }
+        //        let text = searchController.searchBar.text!
+        //        if searchButtonIsSelected {
+        //            findImages(query: text)
+        //        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         lastQueryText = searchBar.text?.trimmingCharacters(in: .whitespaces)
         fetchImages(query: lastQueryText)
-//        searchButtonIsSelected = true
-//        updateSearchResults(for: navigationItem.searchController!)
-//        searchButtonIsSelected = false
+        //        searchButtonIsSelected = true
+        //        updateSearchResults(for: navigationItem.searchController!)
+        //        searchButtonIsSelected = false
         //collectionView.reloadData()
     }
     
-}
-
-//MARK:- Collection View Delegate & Data Source
-
-extension ImageSearchViewController : UICollectionViewDelegate {
-    
-    //MARK:- Show Full Screen - disabled
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if cachedImages[indexPath.row] != nil {
-//            let vc = storyboard?.instantiateViewController(identifier: "FullScreenViewController") as! FullScreenViewController
-//            vc.pixabayPhotos = foundImages
-//            vc.indexPath = indexPath
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
-    }
 }
