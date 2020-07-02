@@ -8,7 +8,7 @@
 
 import UIKit
 
-extension ImageSearchCVC {
+extension ImageSearchCVC: DiffableDataSourceAndCompositionalLayoutConfigurable {
     
     //MARK:- Update UI
     func updateUI(animated: Bool = true, hideHeader: Bool = false) {
@@ -80,7 +80,7 @@ extension ImageSearchCVC {
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                   heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            let numberOfItems = 4
+            let numberOfItems = 3
             let heightFraction = 1 / CGFloat(numberOfItems)
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                    heightDimension: .fractionalWidth(heightFraction))
