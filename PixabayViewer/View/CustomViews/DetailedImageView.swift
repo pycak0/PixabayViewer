@@ -44,8 +44,8 @@ class DetailedImageView: UIView {
     
 //    convenience init(pixabayImage: PixabayImageInfo, placeholderImage: UIImage?) {
 //        self.init()
-//        setupView(pixabayImage: pixabayImage, placeholderImage: placeholderImage)
-//        //configure()
+//        setupViewDataSource(pixabayImage: pixabayImage, placeholderImage: placeholderImage)
+//        //configureViews()
 //    }
     
     //MARK:- Awake From Nib
@@ -59,8 +59,23 @@ class DetailedImageView: UIView {
     }
 }
 
+//MARK:- Public
+
+extension DetailedImageView {
+    func setupViewDataSource(pixabayImage: PixabayImageInfo, placeholderImage: UIImage?) {
+        self.imageView.image = placeholderImage
+        self.userNameLabel.text = pixabayImage.user
+        self.tagsLabel.text = pixabayImage.tagsString
+        self.setMetaInfo(likes: pixabayImage.likes,
+                         views: pixabayImage.views,
+                         comments: pixabayImage.comments)
+        configureViews()
+    }
+}
+
+
+//MARK:- Configurations
 private extension DetailedImageView {
-    //configure
     func xibSetup() {
         Bundle.main.loadNibNamed(DetailedImageView.nibName, owner: self, options: nil)
         contentView.frame = bounds
@@ -68,7 +83,7 @@ private extension DetailedImageView {
         addSubview(contentView)
     }
     
-    func configure() {
+    func configureViews() {
         userImageView.layer.cornerRadius = userImageView.frame.width / 2
         //tagsTextView.contentInset = .zero
         configurePinchZoom()
@@ -164,38 +179,5 @@ private extension DetailedImageView {
             sender.setTranslation(.zero, in: self)
         default: break
         }
-    }
-}
-    
-//MARK:- Public
-
-extension DetailedImageView {
-    
-    var userImage: UIImage? {
-        get {
-            userImageView.image
-        }
-        set {
-            userImageView.image = newValue
-        }
-    }
-    
-    var userName: String? {
-        get {
-            userNameLabel.text
-        }
-        set {
-            userNameLabel.text = newValue
-        }
-    }
-    
-    func setupView(pixabayImage: PixabayImageInfo, placeholderImage: UIImage?) {
-        self.imageView.image = placeholderImage
-        self.userNameLabel.text = pixabayImage.user
-        self.tagsLabel.text = pixabayImage.tagsString
-        self.setMetaInfo(likes: pixabayImage.likes,
-                         views: pixabayImage.views,
-                         comments: pixabayImage.comments)
-        configure()
     }
 }

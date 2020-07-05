@@ -46,6 +46,8 @@
 		A4C2D66523A6757100FEC415 /* bigicon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A4C2D66423A6757100FEC415 /* bigicon.jpg */; };
 		A4C2D66923A695A400FEC415 /* PixabayPhotoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4C2D66823A695A400FEC415 /* PixabayPhotoHeaderView.swift */; };
 		A4D2CA8724AB84DA0028BC42 /* AlertExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D2CA8624AB84DA0028BC42 /* AlertExtensions.swift */; };
+		A4EC69A024B1F051006E7A90 /* ShareManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC699F24B1F051006E7A90 /* ShareManager.swift */; };
+		A4EC69A224B1F2BA006E7A90 /* MenuManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4EC69A124B1F2BA006E7A90 /* MenuManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +92,8 @@
 		A4C2D66423A6757100FEC415 /* bigicon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = bigicon.jpg; sourceTree = "<group>"; };
 		A4C2D66823A695A400FEC415 /* PixabayPhotoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixabayPhotoHeaderView.swift; sourceTree = "<group>"; };
 		A4D2CA8624AB84DA0028BC42 /* AlertExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtensions.swift; sourceTree = "<group>"; };
+		A4EC699F24B1F051006E7A90 /* ShareManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareManager.swift; sourceTree = "<group>"; };
+		A4EC69A124B1F2BA006E7A90 /* MenuManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +183,7 @@
 		A445CD8B239EF0A1000B2ED8 /* PixabayViewer */ = {
 			isa = PBXGroup;
 			children = (
+				A4EC699E24B1F042006E7A90 /* Managers */,
 				A40467A824AA339A007B244D /* Models */,
 				A40467A124AA30D1007B244D /* Server */,
 				A445CDA5239EF117000B2ED8 /* View */,
@@ -286,6 +291,15 @@
 			path = ImageSearchCVC;
 			sourceTree = "<group>";
 		};
+		A4EC699E24B1F042006E7A90 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				A4EC699F24B1F051006E7A90 /* ShareManager.swift */,
+				A4EC69A124B1F2BA006E7A90 /* MenuManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -364,6 +378,7 @@
 				A45AFB3123A414C600DB2FB7 /* Thumbnail+CoreDataClass.swift in Sources */,
 				A445CDB5239EF555000B2ED8 /* PixabayPhotoCell.swift in Sources */,
 				A467CA4923A6F0AF00CC945D /* SavingAndLoadingExtention.swift in Sources */,
+				A4EC69A024B1F051006E7A90 /* ShareManager.swift in Sources */,
 				A445CD8D239EF0A1000B2ED8 /* AppDelegate.swift in Sources */,
 				A401049524AD4E420083B1CE /* EditorsChoiceCollectionView.swift in Sources */,
 				A498399524ABE33500C5FE0B /* SearchCollectionView.swift in Sources */,
@@ -390,6 +405,7 @@
 				A498399824AD0C3E00C5FE0B /* UIKitExtensions.swift in Sources */,
 				A40467A324AA310F007B244D /* PixabaySearch.swift in Sources */,
 				A40467AC24AA34FB007B244D /* Globals.swift in Sources */,
+				A4EC69A224B1F2BA006E7A90 /* MenuManager.swift in Sources */,
 				A40467AA24AA33B1007B244D /* PixabayImageInfo.swift in Sources */,
 				A445CD8F239EF0A1000B2ED8 /* SceneDelegate.swift in Sources */,
 				A45AFB3323A414C600DB2FB7 /* FullSize+CoreDataClass.swift in Sources */,

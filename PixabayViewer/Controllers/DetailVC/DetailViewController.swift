@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//MARK:-  DetailViewController.swift
 //  PixabayViewer
 //
 //  Created by Владислав on 13.12.2019.
@@ -23,21 +23,17 @@ class DetailViewController: UIViewController {
         configureViews()
     }
     
-    @IBAction func actionButtonPressed(_ sender: Any) {
-        print("action button pressed")
-    }
-    
     func configureViews() {
         guard pixabayImage != nil else { return }
         contentView.delegate = self
-        contentView.setupView(pixabayImage: pixabayImage.info, placeholderImage: pixabayImage.image)
+        contentView.setupViewDataSource(pixabayImage: pixabayImage.info, placeholderImage: pixabayImage.image)
     }
 
 }
 
 extension DetailViewController: DetailedImageDelegate {
     func actionButtonPressed(_ sender: UIButton) {
-        print("action button pressed")
+        ShareManager.presentShareSheet(for: pixabayImage.image, delegate: self)
     }
     
     func setImages(for imageView: UIImageView, and userImageView: UIImageView) {
