@@ -58,7 +58,10 @@ extension ImageSearchCVC: DiffableDataSourceAndCompositionalLayoutConfigurable {
                 fatalError("Invalid element kind")
             }
             
-            var text = "No images searched recently"
+            var text = ""
+            if let query = self.lastQueryText, self.imageItems.count == 0 {
+                text = "Searching pictures mathcing \(query)…"
+            }
             if self.imageItems.count != 0, let query = self.lastQueryText {
                 text = "Search results matching '\(query)'"
             }
@@ -104,7 +107,12 @@ extension ImageSearchCVC: DiffableDataSourceAndCompositionalLayoutConfigurable {
         }
     }
 
-    // MARK: UICollectionViewDelegate
+    // MARK: Collection View Delegate
+    ///
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "Detailed Search Result", sender: indexPath.item)
+    }
 
     /*
     // Uncomment this method to specify if the specified item should be highlighted during tracking

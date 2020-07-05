@@ -11,81 +11,51 @@
         <!--1 of 1-->
         <scene sceneID="KSH-Cn-f44">
             <objects>
-                <viewController storyboardIdentifier="FullScreenViewController" id="ta9-C4-9rC" customClass="DetailViewController" customModule="PixabayViewer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="ta9-C4-9rC" customClass="DetailViewController" customModule="PixabayViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="aoA-hX-4F9">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sJj-ay-9PK">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="bql-yC-fiN">
-                                    <size key="itemSize" width="411" height="722"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="FullScreenCell" id="ZFi-9Y-NdC" customClass="FullScreenPhotoCell" customModule="PixabayViewer" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="26" width="411" height="722"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="411" height="722"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </view>
-                                        <size key="customSize" width="411" height="722"/>
-                                    </collectionViewCell>
-                                </cells>
-                            </collectionView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uwK-jx-YRJ">
-                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
-                                <items>
-                                    <barButtonItem title="Icon" image="heart" catalog="system" id="7bs-7f-DWd" userLabel="Heart"/>
-                                    <barButtonItem enabled="NO" title="-0-" style="done" id="vPi-u9-Xg0">
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </barButtonItem>
-                                    <barButtonItem image="star" catalog="system" id="Yjb-bv-xdB" userLabel="Star"/>
-                                    <barButtonItem enabled="NO" title="-0-" style="done" id="5aw-1X-4GC" userLabel="Favorites">
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </barButtonItem>
-                                    <barButtonItem title="Item" image="eye" catalog="system" id="84c-Ch-7q6" userLabel="Eye"/>
-                                    <barButtonItem enabled="NO" title="-0-" style="done" id="pCx-X6-HGx">
-                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="Tf4-MI-hXb"/>
-                                    <barButtonItem systemItem="action" id="JT2-oO-M6Z">
-                                        <connections>
-                                            <action selector="shareButtonPressed:" destination="ta9-C4-9rC" id="iJu-FR-xVL"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                            </toolbar>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OeB-JW-AWV" customClass="DetailedImageView" customModule="PixabayViewer" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="414" height="724"/>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="sJj-ay-9PK" firstAttribute="top" secondItem="iFA-fo-q7O" secondAttribute="top" id="1nT-aD-T7y"/>
-                            <constraint firstItem="sJj-ay-9PK" firstAttribute="leading" secondItem="iFA-fo-q7O" secondAttribute="leading" id="2wJ-JX-4cR"/>
-                            <constraint firstItem="uwK-jx-YRJ" firstAttribute="leading" secondItem="iFA-fo-q7O" secondAttribute="leading" id="6M9-21-Xm2"/>
-                            <constraint firstItem="sJj-ay-9PK" firstAttribute="bottom" secondItem="iFA-fo-q7O" secondAttribute="bottom" id="Egl-TO-a8F"/>
-                            <constraint firstItem="iFA-fo-q7O" firstAttribute="bottom" secondItem="uwK-jx-YRJ" secondAttribute="bottom" id="Qy0-Z5-uev"/>
-                            <constraint firstItem="uwK-jx-YRJ" firstAttribute="trailing" secondItem="iFA-fo-q7O" secondAttribute="trailing" id="Xda-HK-Vhq"/>
-                            <constraint firstItem="sJj-ay-9PK" firstAttribute="trailing" secondItem="iFA-fo-q7O" secondAttribute="trailing" id="iyY-8V-oie"/>
-                            <constraint firstItem="uwK-jx-YRJ" firstAttribute="top" secondItem="sJj-ay-9PK" secondAttribute="bottom" constant="-44" id="uth-2t-Y3a"/>
+                            <constraint firstItem="OeB-JW-AWV" firstAttribute="top" secondItem="iFA-fo-q7O" secondAttribute="top" id="41R-J9-gd7"/>
+                            <constraint firstItem="OeB-JW-AWV" firstAttribute="leading" secondItem="iFA-fo-q7O" secondAttribute="leading" id="S3q-Kg-CAH"/>
+                            <constraint firstItem="OeB-JW-AWV" firstAttribute="trailing" secondItem="iFA-fo-q7O" secondAttribute="trailing" id="Vyg-Ah-zOe"/>
+                            <constraint firstItem="iFA-fo-q7O" firstAttribute="bottom" secondItem="OeB-JW-AWV" secondAttribute="bottom" constant="50" id="kcP-WI-Tlc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iFA-fo-q7O"/>
                     </view>
-                    <navigationItem key="navigationItem" title="1 of 1" largeTitleDisplayMode="never" id="qDo-aq-FG2"/>
+                    <navigationItem key="navigationItem" title="1 of 1" largeTitleDisplayMode="never" id="qDo-aq-FG2">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="yWz-c1-4Q0">
+                            <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <connections>
+                                <action selector="actionButtonPressed:" destination="ta9-C4-9rC" id="PAM-fp-zmP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
-                        <outlet property="collectionView" destination="sJj-ay-9PK" id="GHu-Xd-6EH"/>
-                        <outlet property="favorites" destination="5aw-1X-4GC" id="UIQ-ea-mKI"/>
-                        <outlet property="header" destination="qDo-aq-FG2" id="ese-gq-Z4e"/>
-                        <outlet property="likes" destination="vPi-u9-Xg0" id="n0q-T0-UzM"/>
-                        <outlet property="views" destination="pCx-X6-HGx" id="iYx-SW-spw"/>
+                        <outlet property="contentView" destination="OeB-JW-AWV" id="kmn-8n-v9L"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aev-Rl-PUK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2719" y="46"/>
+            <point key="canvasLocation" x="3693" y="783"/>
+        </scene>
+        <!--Image-->
+        <scene sceneID="Za1-FU-VMP">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="EjD-cF-RaN" customClass="PageViewController" customModule="PixabayViewer" customModuleProvider="target" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Image" largeTitleDisplayMode="never" id="Ym0-FP-1xn"/>
+                </pageViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sls-q9-JJy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2738" y="783"/>
         </scene>
         <!--Search Images-->
         <scene sceneID="aaG-5p-wyg">
@@ -102,7 +72,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <view key="backgroundView" contentMode="scaleToFill" id="xqI-a7-dpp">
-                            <rect key="frame" x="0.0" y="-88" width="414" height="896"/>
+                            <rect key="frame" x="0.0" y="-140" width="414" height="896"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="4xc-z9-kDt">
@@ -180,7 +150,7 @@ with Pixabay!</string>
                     <navigationItem key="navigationItem" title="Search Images" id="JOA-sy-h7O"/>
                     <connections>
                         <outlet property="activityIndicator" destination="4xc-z9-kDt" id="6PS-dL-hhg"/>
-                        <segue destination="ta9-C4-9rC" kind="show" identifier="Show detailed search" id="YS4-Rw-8ii"/>
+                        <segue destination="EjD-cF-RaN" kind="show" identifier="Detailed Search Result" id="pOm-iz-d3V"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lZa-kh-zNR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -259,9 +229,4 @@ with Pixabay!</string>
             <point key="canvasLocation" x="1660.8695652173915" y="1581.6964285714284"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="eye" catalog="system" width="128" height="81"/>
-        <image name="heart" catalog="system" width="128" height="109"/>
-        <image name="star" catalog="system" width="128" height="116"/>
-    </resources>
 </document>

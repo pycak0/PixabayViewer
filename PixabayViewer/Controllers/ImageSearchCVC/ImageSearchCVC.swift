@@ -33,6 +33,19 @@ class ImageSearchCVC: UICollectionViewController {
         
     }
     
+    //MARK:- Prepare for Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "Detailed Search Result":
+            let vc = segue.destination as! PageViewController
+            let index = sender as! Int
+            vc.index = index
+            vc.pixabayImages = imageItems
+        default:
+            break
+        }
+    }
+    
     //MARK:- Fetch Images
     func fetchImages(query: String?) {
         guard let text = query else {
@@ -56,6 +69,7 @@ class ImageSearchCVC: UICollectionViewController {
         lastQueryRequest = PixabaySearch.TaskResult(object: text, taskId: token)
     }
     
+    //MARK:- Load Image
     func loadImage(url: URL?, for cell: PixabayImageCell, at index: Int) -> UUID? {
         PixabaySearch.shared.getImage(with: url) { (image) in
             self.imageItems[index].image = image
@@ -68,6 +82,7 @@ class ImageSearchCVC: UICollectionViewController {
         
     }
     
+    //MARK:- Clear Seacrh Results
     func clearSearchResults() {
         imageItems.removeAll()
         updateUI(hideHeader: true)

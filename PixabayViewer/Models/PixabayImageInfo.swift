@@ -12,12 +12,19 @@ import Foundation
 struct PixabayImageInfo: Hashable, Decodable {
     private var previewURL: String?
     private var imageURL: String?
+    private var largeImageURL: String?
     private var webformatURL: String
+    private var userImageURL: String?
+    private var user_id: Int
+    private var tags: String?
+
+    var user: String
     var id: Int = 0
     var likes: Int = 0
     var favorites: Int = 0
     var views: Int = 0
-    
+    var comments: Int = 0
+
     
     func hash(into hasher: inout Hasher) {
         hasher.combine(id)
@@ -41,10 +48,25 @@ extension PixabayImageInfo {
         if let stringUrl = imageURL {
             return URL(string: stringUrl)
         }
-        let webStringUrl960 = webformatURL.replacingOccurrences(of: "_640", with: "_960")
-        if let webUrl960 = URL(string: webStringUrl960) { return webUrl960 }
+        if let stringUrl = largeImageURL {
+            return URL(string: stringUrl)
+        }
         
         return URL(string: webformatURL)
+    }
+    
+    var userImageUrl: URL? {
+        URL(string: self.userImageURL ?? "")
+    }
+    
+    ///Returns tags in the way of `["blossom", "bloom", "flower"]` or an empty array
+    var tagsSplitted: [String] {
+        tags?.components(separatedBy: ",") ?? []
+    }
+    
+    ///Returns tags in the way of `"blossom, bloom, flower"` or an empty string
+    var tagsString: String {
+        tags ?? ""
     }
     
 }

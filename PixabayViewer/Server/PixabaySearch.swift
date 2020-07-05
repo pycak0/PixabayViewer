@@ -127,7 +127,8 @@ class PixabaySearch {
             guard error == nil, (response as? HTTPURLResponse)?.statusCode == 200,
                 let data = data else {
                     DispatchQueue.main.async {
-                        print("Error:", error ?? "Unknown error")
+                        print("Failure downloading image with url: \(url)")
+                        print(error ?? "Response Status Code: \((response as! HTTPURLResponse).statusCode)")
                         completion(nil)
                     }
                     return
