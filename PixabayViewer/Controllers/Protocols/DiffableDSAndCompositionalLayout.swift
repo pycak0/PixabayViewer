@@ -12,6 +12,7 @@ typealias DiffableDataSourceAndCompositionalLayoutConfigurable =
     DiffableDataSourceConfigurable & CompositionalLayoutConfigurable
 
 protocol DiffableDataSourceConfigurable {
+    ///It is obligatory to define a property `dataSource` in vc for this method
     func configureDataSource()
     func updateUI(animated: Bool, hideHeader: Bool)
 }

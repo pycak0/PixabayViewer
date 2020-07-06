@@ -8,8 +8,7 @@
 
 import UIKit
 
-class ImageSearchCVC: UICollectionViewController {
-    
+class ImageSearchCVC: UICollectionViewController, ImageCollectionLoadable {
     enum Section {
         case main
     }
@@ -19,7 +18,7 @@ class ImageSearchCVC: UICollectionViewController {
     
     private var searchButtonIsSelected = false
     var lastQueryText: String?
-    var lastQueryRequest: PixabaySearch.TaskResult<String>?
+    var runningQueryRequestToken: UUID?
     var imageItems = [PixabayImageItem]()
     
     override func viewDidLoad() {
@@ -37,8 +36,12 @@ class ImageSearchCVC: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case "Detailed Search Result":
-            let vc = segue.destination as! PageViewController
-            let index = sender as! Int
+            guard let vc = segue.destination as? PageViewController else {
+                fatalError("Incorrect VC type for detailed image")
+            }
+            guard let index = sender as? Int else {
+                fatalError("Incorrect sender type (expected: Int, got: \(type(of: sender)))")
+            }
             vc.index = index
             vc.pixabayImages = imageItems
         default:
@@ -47,26 +50,27 @@ class ImageSearchCVC: UICollectionViewController {
     }
     
     //MARK:- Fetch Images
-    func fetchImages(query: String?) {
-        guard let text = query else {
+    func fetchImages(_ requestType: String?, amount: Int? = nil, pageNumber: Int? = nil) {
+        guard let text = requestType else {
             return
         }
-        lastQueryRequest?.cancel()
+        PixabaySearch.shared.cancelTask(with: runningQueryRequestToken)
         clearSearchResults()
         setLoadingIndicator(enabled: true)
         let token = PixabaySearch.shared.getImages(.query(text), amount: 100) { (sessionResult) in
             self.setLoadingIndicator(enabled: false)
+            self.runningQueryRequestToken = nil
             switch sessionResult {
             case let .error(error):
                 print(error)
                 self.showErrorConnectingToServerAlert()
                 
             case let .success(images):
-                self.imageItems = images.map { PixabayImageItem(info: $0, image: nil) }
+                self.imageItems = images.map { PixabayImageItem(info: $0) }
                 self.updateUI()
             }
         }
-        lastQueryRequest = PixabaySearch.TaskResult(object: text, taskId: token)
+        runningQueryRequestToken = token
     }
     
     //MARK:- Load Image
@@ -121,17 +125,13 @@ extension ImageSearchCVC: UISearchResultsUpdating, UISearchControllerDelegate, U
     func updateSearchResults(for searchController: UISearchController) {
         //        let text = searchController.searchBar.text!
         //        if searchButtonIsSelected {
-        //            findImages(query: text)
+        //            fetchImages(lastQueryText)
         //        }
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         lastQueryText = searchBar.text?.trimmingCharacters(in: .whitespaces)
-        fetchImages(query: lastQueryText)
-        //        searchButtonIsSelected = true
-        //        updateSearchResults(for: navigationItem.searchController!)
-        //        searchButtonIsSelected = false
-        //collectionView.reloadData()
+        fetchImages(lastQueryText)
     }
     
 }

@@ -19,7 +19,7 @@ extension ImageSearchCVC: DiffableDataSourceAndCompositionalLayoutConfigurable {
         self.dataSource.apply(newShapshot, animatingDifferences: animated)
         
         if let header = collectionView.visibleSupplementaryViews(ofKind: UICollectionView.elementKindSectionHeader).first as? SearchHeaderView,
-            let query = lastQueryRequest?.object {
+            let query = lastQueryText {
             header.titleLabel.text = "Search results matching '\(query)'"
             header.isHidden = hideHeader
         }
@@ -27,7 +27,7 @@ extension ImageSearchCVC: DiffableDataSourceAndCompositionalLayoutConfigurable {
     
     //MARK:- Configure Data Source
     func configureDataSource() {
-        self.dataSource = UICollectionViewDiffableDataSource<Section, PixabayImageItem>(collectionView: self.collectionView) { (collectionView, indexPath, pixabayImage) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, PixabayImageItem>(collectionView: self.collectionView) { (collectionView, indexPath, pixabayImage) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PixabayImageCell.reuseIdentifier, for: indexPath) as? PixabayImageCell else {
                 fatalError("Incorrect Cell Type")
             }
@@ -79,7 +79,7 @@ extension ImageSearchCVC: DiffableDataSourceAndCompositionalLayoutConfigurable {
     
     //MARK:- Create Layout
     func createLayout() -> UICollectionViewLayout {
-        return UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+        UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                   heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)

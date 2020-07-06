@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XWI-Gx-ljh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TDd-I2-joQ">
     <device id="retina6_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
@@ -44,7 +44,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aev-Rl-PUK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3693" y="783"/>
+            <point key="canvasLocation" x="4602.898550724638" y="782.8125"/>
         </scene>
         <!--Image-->
         <scene sceneID="Za1-FU-VMP">
@@ -55,13 +55,13 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sls-q9-JJy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2738" y="783"/>
+            <point key="canvasLocation" x="3807" y="1291"/>
         </scene>
         <!--Search Images-->
         <scene sceneID="aaG-5p-wyg">
             <objects>
                 <collectionViewController id="1Ny-O5-H1k" customClass="ImageSearchCVC" customModule="PixabayViewer" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" dataMode="prototypes" id="Ehf-c2-VJ0">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="interactive" dataMode="prototypes" id="Ehf-c2-VJ0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -72,7 +72,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <view key="backgroundView" contentMode="scaleToFill" id="xqI-a7-dpp">
-                            <rect key="frame" x="0.0" y="-140" width="414" height="896"/>
+                            <rect key="frame" x="0.0" y="-88" width="414" height="896"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="4xc-z9-kDt">
@@ -155,12 +155,12 @@ with Pixabay!</string>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lZa-kh-zNR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1815.9420289855075" y="782.8125"/>
+            <point key="canvasLocation" x="2726.0869565217395" y="782.8125"/>
         </scene>
         <!--Editor's Choice-->
         <scene sceneID="ZI7-ev-3Xo">
             <objects>
-                <collectionViewController id="MMA-Rn-Hig" sceneMemberID="viewController">
+                <collectionViewController id="MMA-Rn-Hig" customClass="EditorsChoiceCVC" customModule="PixabayViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="j7k-PV-eGG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -172,13 +172,28 @@ with Pixabay!</string>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="NNg-YZ-QHo">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EditorsChoiceCell" id="NNg-YZ-QHo" customClass="EditorsChoiceCell" customModule="PixabayViewer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hyN-hF-oEc">
                                     <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6si-vV-qc0">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <color key="backgroundColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="6si-vV-qc0" secondAttribute="bottom" id="9WS-8t-Ypc"/>
+                                        <constraint firstItem="6si-vV-qc0" firstAttribute="leading" secondItem="hyN-hF-oEc" secondAttribute="leading" id="GlB-0R-OyZ"/>
+                                        <constraint firstAttribute="trailing" secondItem="6si-vV-qc0" secondAttribute="trailing" id="J6R-aR-oKP"/>
+                                        <constraint firstItem="6si-vV-qc0" firstAttribute="top" secondItem="hyN-hF-oEc" secondAttribute="top" id="XO1-kK-aPQ"/>
+                                    </constraints>
                                 </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="imageView" destination="6si-vV-qc0" id="wLN-9d-VVo"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -187,15 +202,19 @@ with Pixabay!</string>
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Editor's Choice" id="uD1-Pa-IdC"/>
+                    <connections>
+                        <segue destination="EjD-cF-RaN" kind="show" identifier="Detailed Editors Choice" id="1Si-u7-Rnm"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tiG-Pm-l9S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2571.0144927536235" y="1581.6964285714284"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Search-->
         <scene sceneID="zDv-7c-fD7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XWI-Gx-ljh" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Search" image="magnifyingglass" catalog="system" id="N6i-uK-9Wa"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="uga-4T-HDX">
                         <rect key="frame" x="0.0" y="44" width="414" height="96"/>
@@ -208,12 +227,13 @@ with Pixabay!</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MtK-8B-ym5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="905.79710144927549" y="782.8125"/>
+            <point key="canvasLocation" x="1815.9420289855075" y="782.8125"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Editor's Choice-->
         <scene sceneID="1aJ-hG-DR9">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1AN-j1-iiJ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Editor's Choice" image="pixabaySymbol25" id="6o7-QA-O7B"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JAE-nG-za4">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -228,5 +248,32 @@ with Pixabay!</string>
             </objects>
             <point key="canvasLocation" x="1660.8695652173915" y="1581.6964285714284"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="SEi-y1-Eks">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="TDd-I2-joQ" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Sfl-PV-RBg">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="XWI-Gx-ljh" kind="relationship" relationship="viewControllers" id="gfD-bY-mtL"/>
+                        <segue destination="1AN-j1-iiJ" kind="relationship" relationship="viewControllers" id="nzN-hi-ckU"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KH9-AK-Fd8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="905.79710144927549" y="782.8125"/>
+        </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="1Si-u7-Rnm"/>
+    </inferredMetricsTieBreakers>
+    <resources>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="pixabaySymbol25" width="25" height="25"/>
+    </resources>
 </document>

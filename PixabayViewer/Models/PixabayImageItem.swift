@@ -12,7 +12,6 @@ import UIKit
 struct PixabayImageItem {
     var info: PixabayImageInfo
     var image: UIImage?
-    var loadingId: UUID?
     
     init(info: PixabayImageInfo, image: UIImage?) {
         self.info = info

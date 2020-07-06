@@ -1,5 +1,5 @@
 //
-//  PixabaySearch.swift
+//MARK:  PixabaySearch.swift
 //  PixabayViewer
 //
 //  Created by Владислав on 29.06.2020.
@@ -10,9 +10,20 @@ import UIKit
 
 class PixabaySearch {
     
+    static var shared = PixabaySearch()
+    
+    private var session = URLSession(configuration: .default)
+    private var runningTasks: Dictionary<UUID, URLSessionTask>? = [UUID : URLSessionTask]()
+    
+    //MARK:- Task Result
     struct TaskResult<T> {
         var object: T?
         var taskId: UUID?
+        
+        init(_ object: T?, taskId: UUID?) {
+            self.object = object
+            self.taskId = taskId
+        }
         
         func cancel() {
             guard let id = taskId else {
@@ -22,24 +33,7 @@ class PixabaySearch {
         }
     }
     
-    static var shared = PixabaySearch()
-        
-    private var session = URLSession(configuration: .default)
-    private var runningTasks: Dictionary<UUID, URLSessionTask>? = [UUID : URLSessionTask]()
-    
-    func cancelTask(with id: UUID?) {
-        guard let id = id else {
-            return
-        }
-        runningTasks?[id]?.cancel()
-        runningTasks?.removeValue(forKey: id)
-    }
-    
-    func cancelAllTasks() {
-        runningTasks?.values.forEach { $0.cancel() }
-        runningTasks?.removeAll()
-    }
-    
+    //MARK:- Request Type
     enum RequestType {
         case editorsChoice, query(String)
         
@@ -59,8 +53,23 @@ class PixabaySearch {
         
     }
     
+    func cancelTask(with id: UUID?) {
+        guard let id = id else {
+            return
+        }
+        runningTasks?[id]?.cancel()
+        runningTasks?.removeValue(forKey: id)
+    }
+    
+    func cancelAllTasks() {
+        runningTasks?.values.forEach { $0.cancel() }
+        runningTasks?.removeAll()
+    }
+    
     //MARK:- Get Images by Query
+    ///- Returns: A '`UUID?`' of `PixabaySearch.session` dataTask for the request
     func getImages(_ requestType: RequestType, amount: Int = 25, pageNumber: Int = 1, completion: @escaping ((SessionResult<[PixabayImageInfo]>) -> Void)) -> UUID? {
+        
         var imagesUrlComponents = Globals.baseUrlComponent
         imagesUrlComponents.queryItems?.append(
             contentsOf: requestType.queryItems(numberOfImages: amount, pageNumber: pageNumber))
@@ -111,6 +120,7 @@ class PixabaySearch {
     
     
     //MARK:- Get UIImage
+    ///- Returns: A '`UUID?`' of `PixabaySearch.session` dataTask for the request
     func getImage(with imageUrl: URL?, completion: @escaping ((UIImage?) -> Void)) -> UUID? {
         guard let url = imageUrl else {
             DispatchQueue.main.async {
