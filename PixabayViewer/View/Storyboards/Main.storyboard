@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -61,7 +60,7 @@
         <scene sceneID="aaG-5p-wyg">
             <objects>
                 <collectionViewController id="1Ny-O5-H1k" customClass="ImageSearchCVC" customModule="PixabayViewer" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" keyboardDismissMode="interactive" dataMode="prototypes" id="Ehf-c2-VJ0">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" delaysContentTouches="NO" keyboardDismissMode="interactive" dataMode="prototypes" id="Ehf-c2-VJ0">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -72,7 +71,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <view key="backgroundView" contentMode="scaleToFill" id="xqI-a7-dpp">
-                            <rect key="frame" x="0.0" y="-88" width="414" height="896"/>
+                            <rect key="frame" x="0.0" y="-140" width="414" height="896"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="center" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="4xc-z9-kDt">
@@ -97,31 +96,7 @@ with Pixabay!</string>
                                 <constraint firstAttribute="trailing" secondItem="L6E-jY-Pe5" secondAttribute="trailing" constant="30" id="hjJ-Gs-lAN"/>
                             </constraints>
                         </view>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PixabayImageCell" id="9en-NT-Pek" customClass="PixabayImageCell" customModule="PixabayViewer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="34" width="128" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="xbt-to-Zyq">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9xQ-Wn-JjU">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <color key="backgroundColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="9xQ-Wn-JjU" secondAttribute="bottom" id="fJh-8d-elu"/>
-                                        <constraint firstAttribute="trailing" secondItem="9xQ-Wn-JjU" secondAttribute="trailing" id="l70-V4-3Q5"/>
-                                        <constraint firstItem="9xQ-Wn-JjU" firstAttribute="leading" secondItem="xbt-to-Zyq" secondAttribute="leading" id="v3r-mV-1AV"/>
-                                        <constraint firstItem="9xQ-Wn-JjU" firstAttribute="top" secondItem="xbt-to-Zyq" secondAttribute="top" id="wEp-kT-kPS"/>
-                                    </constraints>
-                                </collectionViewCellContentView>
-                                <connections>
-                                    <outlet property="imageView" destination="9xQ-Wn-JjU" id="YoH-rI-QMp"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
+                        <cells/>
                         <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="SearchHeaderView" id="yrQ-SX-lNg" customClass="SearchHeaderView" customModule="PixabayViewer" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="414" height="34"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -161,7 +136,7 @@ with Pixabay!</string>
         <scene sceneID="ZI7-ev-3Xo">
             <objects>
                 <collectionViewController id="MMA-Rn-Hig" customClass="EditorsChoiceCVC" customModule="PixabayViewer" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="j7k-PV-eGG">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" delaysContentTouches="NO" dataMode="prototypes" id="j7k-PV-eGG">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -171,31 +146,7 @@ with Pixabay!</string>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EditorsChoiceCell" id="NNg-YZ-QHo" customClass="EditorsChoiceCell" customModule="PixabayViewer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="hyN-hF-oEc">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6si-vV-qc0">
-                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                            <color key="backgroundColor" systemColor="placeholderTextColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </imageView>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="6si-vV-qc0" secondAttribute="bottom" id="9WS-8t-Ypc"/>
-                                        <constraint firstItem="6si-vV-qc0" firstAttribute="leading" secondItem="hyN-hF-oEc" secondAttribute="leading" id="GlB-0R-OyZ"/>
-                                        <constraint firstAttribute="trailing" secondItem="6si-vV-qc0" secondAttribute="trailing" id="J6R-aR-oKP"/>
-                                        <constraint firstItem="6si-vV-qc0" firstAttribute="top" secondItem="hyN-hF-oEc" secondAttribute="top" id="XO1-kK-aPQ"/>
-                                    </constraints>
-                                </collectionViewCellContentView>
-                                <connections>
-                                    <outlet property="imageView" destination="6si-vV-qc0" id="wLN-9d-VVo"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
+                        <cells/>
                         <connections>
                             <outlet property="dataSource" destination="MMA-Rn-Hig" id="Nff-yb-Jb3"/>
                             <outlet property="delegate" destination="MMA-Rn-Hig" id="Mmx-Un-IRd"/>
@@ -235,8 +186,8 @@ with Pixabay!</string>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1AN-j1-iiJ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Editor's Choice" image="pixabaySymbol25" id="6o7-QA-O7B"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="JAE-nG-za4">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="JAE-nG-za4">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

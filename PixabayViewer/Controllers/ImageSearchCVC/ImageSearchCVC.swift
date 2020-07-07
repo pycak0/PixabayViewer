@@ -32,6 +32,11 @@ class ImageSearchCVC: UICollectionViewController, ImageCollectionLoadable {
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tabBarController?.delegate = self
+    }
+    
     //MARK:- Prepare for Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
@@ -42,22 +47,23 @@ class ImageSearchCVC: UICollectionViewController, ImageCollectionLoadable {
             guard let index = sender as? Int else {
                 fatalError("Incorrect sender type (expected: Int, got: \(type(of: sender)))")
             }
-            vc.index = index
+            vc.currentIndex = index
             vc.pixabayImages = imageItems
+            vc.indexDelegate = self
         default:
             break
         }
     }
     
     //MARK:- Fetch Images
-    func fetchImages(_ requestType: String?, amount: Int? = nil, pageNumber: Int? = nil) {
-        guard let text = requestType else {
+    func fetchImages(_ query: String?) {
+        guard let text = query else {
             return
         }
         PixabaySearch.shared.cancelTask(with: runningQueryRequestToken)
         clearSearchResults()
         setLoadingIndicator(enabled: true)
-        let token = PixabaySearch.shared.getImages(.query(text), amount: 100) { (sessionResult) in
+        let token = PixabaySearch.shared.getImages(.query(text), config: .firstPage100Items) { (sessionResult) in
             self.setLoadingIndicator(enabled: false)
             self.runningQueryRequestToken = nil
             switch sessionResult {
@@ -132,6 +138,28 @@ extension ImageSearchCVC: UISearchResultsUpdating, UISearchControllerDelegate, U
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         lastQueryText = searchBar.text?.trimmingCharacters(in: .whitespaces)
         fetchImages(lastQueryText)
+    }
+    
+}
+
+//MARK:- UITabBarControllerDelegate
+extension ImageSearchCVC: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        guard tabBarController.selectedIndex == 0 else { return }
+        var point = CGPoint.zero
+        if let y = navigationController?.navigationBar.bounds.maxY {
+            point.y = y
+        }
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top, animated: true)
+    }
+}
+
+//MARK:- PageVC Current Index Delegate
+extension ImageSearchCVC: PageViewControllerCurrentIndexDelegate {
+    func pageVC(_ currentIndex: Int) {
+        let indexPath = IndexPath(item: currentIndex, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
     }
     
 }

@@ -8,21 +8,34 @@
 
 import UIKit
 
+protocol PageViewControllerCurrentIndexDelegate: class {
+    func pageVC(_ currentIndex: Int)
+}
+
 class PageViewController: UIPageViewController {
+    
+    weak var indexDelegate: PageViewControllerCurrentIndexDelegate?
     
     private var detailVCs: [UIViewController]!
     
     var pixabayImages: [PixabayImageItem]!
-    var index: Int!
+    var currentIndex: Int!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configure()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        indexDelegate?.pageVC(currentIndex)
+    }
+    
+    
     //MARK:- Configure
     private func configure() {
         dataSource = self
+        delegate = self
         
         detailVCs = pixabayImages.map { (image) -> UIViewController in
             guard let detailVC = storyboard?.instantiateViewController(withIdentifier: DetailViewController.storyboardID) as? DetailViewController else {
@@ -33,7 +46,7 @@ class PageViewController: UIPageViewController {
             return detailVC
         }
         
-        setViewControllers([detailVCs[index]], direction: .forward, animated: true, completion: nil)
+        setViewControllers([detailVCs[currentIndex]], direction: .forward, animated: true, completion: nil)
     }
     
 }
@@ -62,10 +75,8 @@ extension PageViewController: UIPageViewControllerDelegate {
     
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if completed {
-            if let vc = pageViewController.presentedViewController, let index = detailVCs.firstIndex(of: vc) {
-                self.index = index
-                print("index changed")
-            }
+            guard let vc = pageViewController.viewControllers?.first else { return }
+            self.currentIndex = detailVCs.firstIndex(of: vc)!
         }
     }
 }

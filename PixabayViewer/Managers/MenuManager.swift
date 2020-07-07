@@ -8,7 +8,8 @@
 
 import UIKit
 
-class MenuManager {
+class MenuManager: Manager {
+    
     static func contextMenuConfiguration() -> UIContextMenuConfiguration? {
         return nil
     }

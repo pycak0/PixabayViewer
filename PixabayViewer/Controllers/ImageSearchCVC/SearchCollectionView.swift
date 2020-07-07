@@ -75,6 +75,7 @@ extension ImageSearchCVC: DiffableDataSourceAndCompositionalLayoutConfigurable {
     func configureCollectionView() {
         //collectionView.delegate = self
         collectionView.collectionViewLayout = createLayout()
+        collectionView.register(PixabayImageCell.self, forCellWithReuseIdentifier: PixabayImageCell.reuseIdentifier)
     }
     
     //MARK:- Create Layout

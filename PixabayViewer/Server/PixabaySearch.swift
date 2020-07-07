@@ -9,38 +9,36 @@
 import UIKit
 
 class PixabaySearch {
+    //singleton
+    private init() {}
     
-    static var shared = PixabaySearch()
+    static let shared = PixabaySearch()
     
     private var session = URLSession(configuration: .default)
     private var runningTasks: Dictionary<UUID, URLSessionTask>? = [UUID : URLSessionTask]()
     
-    //MARK:- Task Result
-    struct TaskResult<T> {
-        var object: T?
-        var taskId: UUID?
+    struct SearchConfiguration {
+        var itemsAmount = 25
+        var imageOrder = ImageOrder.popular
+        var pageNumber = 1
         
-        init(_ object: T?, taskId: UUID?) {
-            self.object = object
-            self.taskId = taskId
-        }
-        
-        func cancel() {
-            guard let id = taskId else {
-                return
-            }
-            shared.cancelTask(with: id)
-        }
+        static let general = SearchConfiguration()
+        static let firstPage100Items = SearchConfiguration(itemsAmount: 100, pageNumber: 1)
+    }
+    
+    enum ImageOrder: String {
+        case popular, latest
     }
     
     //MARK:- Request Type
     enum RequestType {
         case editorsChoice, query(String)
         
-        func queryItems(numberOfImages amount: Int, pageNumber: Int) -> [URLQueryItem] {
+        func queryItems(with configuration: SearchConfiguration) -> [URLQueryItem] {
             var items = [
-                URLQueryItem(name: "per_page", value: "\(amount)"),
-                URLQueryItem(name: "page", value: "\(pageNumber)")
+                URLQueryItem(name: "per_page", value: "\(configuration.itemsAmount)"),
+                URLQueryItem(name: "page", value: "\(configuration.pageNumber)"),
+                URLQueryItem(name: "order", value: configuration.imageOrder.rawValue)
             ]
             switch self {
             case let .query(text):
@@ -68,11 +66,11 @@ class PixabaySearch {
     
     //MARK:- Get Images by Query
     ///- Returns: A '`UUID?`' of `PixabaySearch.session` dataTask for the request
-    func getImages(_ requestType: RequestType, amount: Int = 25, pageNumber: Int = 1, completion: @escaping ((SessionResult<[PixabayImageInfo]>) -> Void)) -> UUID? {
+    func getImages(_ requestType: RequestType, config: SearchConfiguration, completion: @escaping ((SessionResult<[PixabayImageInfo]>) -> Void)) -> UUID? {
         
         var imagesUrlComponents = Globals.baseUrlComponent
         imagesUrlComponents.queryItems?.append(
-            contentsOf: requestType.queryItems(numberOfImages: amount, pageNumber: pageNumber))
+            contentsOf: requestType.queryItems(with: config))
         
         guard let url = imagesUrlComponents.url else {
             completion(.error(.urlError))

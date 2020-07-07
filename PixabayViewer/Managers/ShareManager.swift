@@ -10,7 +10,7 @@ import UIKit
 import LinkPresentation
 import MobileCoreServices
 
-class ShareManager {
+class ShareManager: Manager {
 
     //MARK:- Present Share Sheet
     static func presentShareSheet(for image: UIImage?, delegate: UIViewController, title: String? = nil) {

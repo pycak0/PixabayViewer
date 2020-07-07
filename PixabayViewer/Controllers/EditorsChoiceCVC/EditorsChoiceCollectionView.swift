@@ -8,11 +8,20 @@
 
 import UIKit
 
+extension EditorsChoiceCVC {
+    //MARK:- Delegate
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "Detailed Editors Choice", sender: indexPath.item)
+    }
+    
+}
+
 extension EditorsChoiceCVC: DiffableDataSourceAndCompositionalLayoutConfigurable {
     
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, PixabayImageItem>(collectionView: self.collectionView) { (collectionView, indexPath, pixabayImage) -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EditorsChoiceCell.reuseIdentifier, for: indexPath) as? EditorsChoiceCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PixabayImageCell.reuseIdentifier, for: indexPath) as? PixabayImageCell else {
                 fatalError("Incorrect Cell Type")
             }
 
@@ -20,8 +29,8 @@ extension EditorsChoiceCVC: DiffableDataSourceAndCompositionalLayoutConfigurable
                 cell.imageView.image = image
             } else {
                 let token = cell.imageView.loadImage(url: pixabayImage.info.thumbnailUrl) { image in
-                    self.imageItems[indexPath.row].image = image
-                    self.updateUI()
+                    self.imageItems[indexPath.item].image = image
+                    self.updateItemInCurrentSnapshot(self.imageItems[indexPath.item])
                 }
                 cell.onReuse = {
                     PixabaySearch.shared.cancelTask(with: token)
@@ -40,7 +49,7 @@ extension EditorsChoiceCVC: DiffableDataSourceAndCompositionalLayoutConfigurable
         self.dataSource.apply(newShapshot, animatingDifferences: animated)
     }
     
-    func updateItemsInCurrentSnapshot(_ item: PixabayImageItem) {
+    func updateItemInCurrentSnapshot(_ item: PixabayImageItem) {
         var updatedSnapshot = dataSource.snapshot()
         guard let itemIndex = updatedSnapshot.indexOfItem(item) else {
             return
@@ -59,18 +68,79 @@ extension EditorsChoiceCVC: DiffableDataSourceAndCompositionalLayoutConfigurable
         dataSource.apply(updatedSnapshot)
     }
     
+    func configureCollectionView() {
+        collectionView.collectionViewLayout = createLayout()
+        collectionView.register(PixabayImageCell.self, forCellWithReuseIdentifier: PixabayImageCell.reuseIdentifier)
+    }
+    
+    
     func createLayout() -> UICollectionViewLayout {
         UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
-            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                  heightDimension: .fractionalHeight(1.0))
-            let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            let numberOfItems = 3
-            let heightFraction = 1 / CGFloat(numberOfItems)
-            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                   heightDimension: .fractionalWidth(heightFraction))
-            let spacing: CGFloat = 2
-            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: numberOfItems)
-            group.interItemSpacing = .fixed(spacing)
+            let spacing: CGFloat = 1
+            let contentInstets = NSDirectionalEdgeInsets(top: 0, leading: 0.5, bottom: 0, trailing: 0.5)
+            
+            let smallItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .fractionalHeight(0.25)))
+            
+            let largeItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(0.5),
+                heightDimension: .fractionalHeight(1.0)))
+            largeItem.contentInsets = contentInstets
+            
+            let mediumItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1.0),
+                heightDimension: .fractionalHeight(1.0)))
+            
+            let twoSmallItems = NSCollectionLayoutGroup.vertical(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.25),
+                                                   heightDimension: .fractionalHeight(1.0)),
+                subitem: smallItem, count: 2)
+            twoSmallItems.interItemSpacing = .fixed(spacing)
+            
+            let fourItemsSquare = NSCollectionLayoutGroup.horizontal(
+                layoutSize: NSCollectionLayoutSize(widthDimension: largeItem.layoutSize.widthDimension,
+                                                   heightDimension: .fractionalHeight(1.0)),
+                    subitem: twoSmallItems, count: 2)
+            fourItemsSquare.interItemSpacing = .fixed(spacing)
+            fourItemsSquare.contentInsets = contentInstets
+            
+            let tripleGroup = NSCollectionLayoutGroup.horizontal(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                   heightDimension: .fractionalWidth(1 / CGFloat(3))),
+                subitem: mediumItem, count: 3)
+            tripleGroup.interItemSpacing = .fixed(spacing)
+            tripleGroup.contentInsets = NSDirectionalEdgeInsets(top: 1, leading: 0.5, bottom: 1, trailing: 0.5)
+            
+            let leadingLargeItemGroup = NSCollectionLayoutGroup.horizontal(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                   heightDimension: largeItem.layoutSize.widthDimension),
+                subitems: [largeItem, fourItemsSquare])
+            //leadingLargeItemGroup.interItemSpacing = .fixed(spacing)
+            
+            let trailingLargeItemGroup = NSCollectionLayoutGroup.horizontal(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                   heightDimension: largeItem.layoutSize.widthDimension),
+                subitems: [fourItemsSquare, largeItem])
+            //trailingLargeItemGroup.interItemSpacing = .fixed(spacing)
+            
+//            let someGroup = NSCollectionLayoutGroup.vertical(
+//                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+//                                                   heightDimension: .fractionalWidth(1.0)),
+//                subitems: [leadingLargeItemGroup, trailingLargeItemGroup])
+//
+//            let halfGroup = NSCollectionLayoutGroup.vertical(
+//                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+//                                                   heightDimension: .fractionalWidth(5 / CGFloat(6))),
+//                subitems: [leadingLargeItemGroup, tripleGroup])
+//            //halfGroup.interItemSpacing = .fixed(spacing)
+            
+            let heightFraction = 5 / CGFloat(3)
+            let finalGroup = NSCollectionLayoutGroup.vertical(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                   heightDimension: .fractionalWidth(heightFraction)),
+                subitems: [leadingLargeItemGroup, tripleGroup, trailingLargeItemGroup, tripleGroup])
+            //finalGroup.interItemSpacing = .fixed(spacing)
             
             let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -78,25 +148,33 @@ extension EditorsChoiceCVC: DiffableDataSourceAndCompositionalLayoutConfigurable
                 elementKind: UICollectionView.elementKindSectionHeader,
                 alignment: .top
             )
-            let section = NSCollectionLayoutSection(group: group)
-            section.interGroupSpacing = spacing
-            section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
+            let section = NSCollectionLayoutSection(group: finalGroup)
+            section.interGroupSpacing = 0
+            //section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
             //section.boundarySupplementaryItems = [sectionHeader]
             
             return section
             
         }
     }
-    
-    func configureCollectionView() {
-        collectionView.collectionViewLayout = createLayout()
-    }
-    
-    
-    //MARK:- Delegate
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "Detailed Editors Choice", sender: indexPath.item)
-    }
-    
+
 }
+
+
+//drafts:
+//let veryLargeItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(
+//    widthDimension: .fractionalWidth(2 / CGFloat(3)),
+//    heightDimension: .fractionalHeight(1.0)))
+//veryLargeItem.contentInsets = contentInstets
+//
+//let twoMediumItems = NSCollectionLayoutGroup.vertical(
+//    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1 / CGFloat(3)),
+//                                       heightDimension: .fractionalHeight(1.0)),
+//    subitem: mediumItem, count: 2)
+//twoMediumItems.interItemSpacing = .fixed(spacing)
+//twoMediumItems.contentInsets = contentInstets
+//
+//let trailingHugeItemGroup = NSCollectionLayoutGroup.horizontal(
+//    layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+//                                       heightDimension: veryLargeItem.layoutSize.widthDimension),
+//    subitems: [twoMediumItems, veryLargeItem])
