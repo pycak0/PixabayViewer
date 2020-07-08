@@ -15,8 +15,8 @@ class DetailedImageView: UIView {
     weak var delegate: DetailedImageDelegate?
     
     private let maxZoomScale: CGFloat = 6
-    private var isZooming = false
     private var originalImageCenter: CGPoint?
+    private var isZooming = false
     //private var recognizedGestures = [UIGestureRecognizer]()
     
     @IBOutlet private var contentView: UIView!
@@ -169,9 +169,7 @@ private extension DetailedImageView {
         }
         switch sender.state {
         case .began:
-            if self.isZooming {
-                self.originalImageCenter = view.center
-            }
+            self.originalImageCenter = view.center
         case .changed:
             guard self.isZooming else { return }
             let translation = sender.translation(in: self)
