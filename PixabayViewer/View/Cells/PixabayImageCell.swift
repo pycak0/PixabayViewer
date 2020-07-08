@@ -30,9 +30,13 @@ class PixabayImageCell: UICollectionViewCell {
     
     override var isSelected: Bool {
         didSet {
-            if isSelected {
-                self.imageView.alpha = 1
-            }
+            //UIView.animate(withDuration: 0.1) {
+                if self.isSelected && !self.isHighlighted {
+                    self.imageView.alpha = 0.5
+                } else {
+                    self.imageView.alpha = 1
+                }
+            //}
         }
     }
     

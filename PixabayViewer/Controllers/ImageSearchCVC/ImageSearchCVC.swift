@@ -158,8 +158,12 @@ extension ImageSearchCVC: UITabBarControllerDelegate {
 extension ImageSearchCVC: PageViewControllerCurrentIndexDelegate {
     func pageVC(_ currentIndex: Int) {
         let indexPath = IndexPath(item: currentIndex, section: 0)
-        collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+        guard collectionView.cellForItem(at: indexPath) == nil else { return }
+        
         collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.collectionView.deselectItem(at: indexPath, animated: true)
+        }
     }
     
 }

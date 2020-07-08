@@ -1,5 +1,5 @@
 //
-//  EditorsChoiceCVC.swift
+//MARK:  EditorsChoiceCVC.swift
 //  PixabayViewer
 //
 //  Created by Владислав on 02.07.2020.
@@ -13,16 +13,21 @@ class EditorsChoiceCVC: UICollectionViewController, ImageCollectionLoadable {
     enum Section {
         case main
     }
-
+    
+    @IBOutlet private weak var activityIndicator: UIActivityIndicatorView!
+    
+    var selectedImageOrder = PixabaySearch.ImageOrder.popular
     var imageItems = [PixabayImageItem]()
     var dataSource: UICollectionViewDiffableDataSource<Section, PixabayImageItem>!
 
+    //MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDataSource()
         configureCollectionView()
         
-        fetchImages()
+        setActivityIndicator(enabled: true)
+        fetchImages(selectedImageOrder)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,21 +52,37 @@ class EditorsChoiceCVC: UICollectionViewController, ImageCollectionLoadable {
         }
     }
     
+    //MARK:- Fetch Images
     func fetchImages(_ order: PixabaySearch.ImageOrder = .popular) {
         _ = PixabaySearch.shared.getImages(.editorsChoice,
-                                           config: .init(itemsAmount: 100, imageOrder: order)) { (sessionResult) in
-            switch sessionResult {
-            case.error(let error):
-                print(error)
-                self.showErrorConnectingToServerAlert()
+            config: .init(itemsAmount: 100, imageOrder: order)) { (sessionResult) in
                 
-            case.success(let imagesInfo):
-                self.imageItems = imagesInfo.map { PixabayImageItem(info: $0) }
-                self.updateUI()
-            }
+                self.setActivityIndicator(enabled: false)
+                switch sessionResult {
+                case.error(let error):
+                    print(error)
+                    self.showErrorConnectingToServerAlert()
+                    
+                case.success(let imagesInfo):
+                    self.imageItems = imagesInfo.map { PixabayImageItem(info: $0) }
+                    self.updateUI()
+                }
         }
     }
-
+    
+    //MARK:- Image Order Control Pressed
+    @IBAction private func imageOrderControlPressed(_ sender: UISegmentedControl) {
+        let newOrder = PixabaySearch.ImageOrder.allCases[sender.selectedSegmentIndex]
+        if newOrder != selectedImageOrder {
+            selectedImageOrder = newOrder
+            fetchImages(selectedImageOrder)
+        }
+    }
+    
+    func setActivityIndicator(enabled: Bool) {
+        enabled ? activityIndicator.startAnimating() :
+            activityIndicator.stopAnimating()
+    }
 }
 
 
@@ -80,6 +101,11 @@ extension EditorsChoiceCVC: UITabBarControllerDelegate {
 //MARK:- PageVC Current Index Delegate
 extension EditorsChoiceCVC: PageViewControllerCurrentIndexDelegate {
     func pageVC(_ currentIndex: Int) {
-        collectionView.scrollToItem(at: IndexPath(item: currentIndex, section: 0), at: .centeredVertically, animated: true)
+        let indexPath = IndexPath(item: currentIndex, section: 0)
+        guard collectionView.cellForItem(at: indexPath) == nil else { return }
+        collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.collectionView.deselectItem(at: indexPath, animated: true)
+        }
     }
 }

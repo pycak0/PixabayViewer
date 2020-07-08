@@ -26,7 +26,7 @@ class PixabaySearch {
         static let firstPage100Items = SearchConfiguration(itemsAmount: 100, pageNumber: 1)
     }
     
-    enum ImageOrder: String {
+    enum ImageOrder: String, CaseIterable {
         case popular, latest
     }
     

@@ -142,11 +142,48 @@ with Pixabay!</string>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dvS-ki-7M0">
                             <size key="itemSize" width="128" height="128"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
+                        <view key="backgroundView" contentMode="scaleToFill" id="cdd-om-GHU">
+                            <rect key="frame" x="0.0" y="-140" width="414" height="896"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Ffh-0B-Ie1">
+                                    <rect key="frame" x="182" y="423" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                </activityIndicatorView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        </view>
                         <cells/>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="EditorsChoiceHeaderView" id="Quu-Fq-ae5" customClass="EditorsChoiceHeaderView" customModule="PixabayViewer" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="JoX-Mu-zMd">
+                                    <rect key="frame" x="20" y="9.6666666666666643" width="374" height="32"/>
+                                    <segments>
+                                        <segment title="Popular"/>
+                                        <segment title="Latest"/>
+                                    </segments>
+                                    <connections>
+                                        <action selector="imageOrderControlPressed:" destination="MMA-Rn-Hig" eventType="valueChanged" id="Jq6-F4-O6v"/>
+                                        <action selector="imageOrderControlPressed:" destination="MMA-Rn-Hig" eventType="primaryActionTriggered" id="ynY-yH-hJa"/>
+                                        <action selector="imageOrderControlPressed:" destination="MMA-Rn-Hig" eventType="touchUpInside" id="z2E-Wx-OGd"/>
+                                    </connections>
+                                </segmentedControl>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="JoX-Mu-zMd" firstAttribute="centerY" secondItem="Quu-Fq-ae5" secondAttribute="centerY" id="2UT-Zc-sqR"/>
+                                <constraint firstItem="JoX-Mu-zMd" firstAttribute="leading" secondItem="Quu-Fq-ae5" secondAttribute="leading" constant="20" id="R7n-Zi-QXE"/>
+                                <constraint firstItem="JoX-Mu-zMd" firstAttribute="centerX" secondItem="Quu-Fq-ae5" secondAttribute="centerX" id="bCn-GX-f8F"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="imagesOrderControl" destination="JoX-Mu-zMd" id="ndW-Qp-cV3"/>
+                            </connections>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="MMA-Rn-Hig" id="Nff-yb-Jb3"/>
                             <outlet property="delegate" destination="MMA-Rn-Hig" id="Mmx-Un-IRd"/>
@@ -154,6 +191,7 @@ with Pixabay!</string>
                     </collectionView>
                     <navigationItem key="navigationItem" title="Editor's Choice" id="uD1-Pa-IdC"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="Ffh-0B-Ie1" id="ZS7-mu-eKZ"/>
                         <segue destination="EjD-cF-RaN" kind="show" identifier="Detailed Editors Choice" id="1Si-u7-Rnm"/>
                     </connections>
                 </collectionViewController>

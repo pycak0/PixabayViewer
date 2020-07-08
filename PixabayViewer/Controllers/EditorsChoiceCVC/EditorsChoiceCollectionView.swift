@@ -1,5 +1,5 @@
 //
-//  EditorsChoiceCollectionView.swift
+//MARK:  EditorsChoiceCollectionView.swift
 //  PixabayViewer
 //
 //  Created by Владислав on 02.07.2020.
@@ -7,6 +7,12 @@
 //
 
 import UIKit
+
+extension EditorsChoiceCVC: EditorsChoiceHeaderViewDelegate {
+    func headerView(imageOrderControlChangedTo currentIndex: Int) {
+        fetchImages(currentIndex == 0 ? .popular : .latest)
+    }
+}
 
 extension EditorsChoiceCVC {
     //MARK:- Delegate
@@ -19,18 +25,20 @@ extension EditorsChoiceCVC {
 
 extension EditorsChoiceCVC: DiffableDataSourceAndCompositionalLayoutConfigurable {
     
+    //MARK:- Configure Data Source
     func configureDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Section, PixabayImageItem>(collectionView: self.collectionView) { (collectionView, indexPath, pixabayImage) -> UICollectionViewCell? in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PixabayImageCell.reuseIdentifier, for: indexPath) as? PixabayImageCell else {
                 fatalError("Incorrect Cell Type")
             }
 
-            if let image = pixabayImage.image {
+            if let image = self.imageItems[indexPath.row].image { //pixabayImage.image {
                 cell.imageView.image = image
             } else {
                 let token = cell.imageView.loadImage(url: pixabayImage.info.thumbnailUrl) { image in
                     self.imageItems[indexPath.item].image = image
-                    self.updateItemInCurrentSnapshot(self.imageItems[indexPath.item])
+                    //self.updateUI()
+                    //self.updateItemInCurrentSnapshot(self.imageItems[indexPath.item])
                 }
                 cell.onReuse = {
                     PixabaySearch.shared.cancelTask(with: token)
@@ -39,8 +47,19 @@ extension EditorsChoiceCVC: DiffableDataSourceAndCompositionalLayoutConfigurable
             
             return cell
         }
+        
+        //MARK:- Configure Supplementaries
+        dataSource.supplementaryViewProvider = { (collectionView: UICollectionView, kind: String, indexPath: IndexPath) -> UICollectionReusableView? in
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: EditorsChoiceHeaderView.reuseIdentifier, for: indexPath) as? EditorsChoiceHeaderView else {
+                fatalError("Invalid element kind")
+            }
+            headerView.delegate = self
+            
+            return headerView
+        }
     }
     
+    //MARK:- Update UI
     func updateUI(animated: Bool = true) {
         var newShapshot = NSDiffableDataSourceSnapshot<Section, PixabayImageItem>()
         newShapshot.appendSections([.main])
@@ -49,6 +68,7 @@ extension EditorsChoiceCVC: DiffableDataSourceAndCompositionalLayoutConfigurable
         self.dataSource.apply(newShapshot, animatingDifferences: animated)
     }
     
+    //MARK:- Update Item in Current Snapshot
     func updateItemInCurrentSnapshot(_ item: PixabayImageItem) {
         var updatedSnapshot = dataSource.snapshot()
         guard let itemIndex = updatedSnapshot.indexOfItem(item) else {
@@ -68,12 +88,13 @@ extension EditorsChoiceCVC: DiffableDataSourceAndCompositionalLayoutConfigurable
         dataSource.apply(updatedSnapshot)
     }
     
+    //MARK:- Configure Collection View
     func configureCollectionView() {
         collectionView.collectionViewLayout = createLayout()
         collectionView.register(PixabayImageCell.self, forCellWithReuseIdentifier: PixabayImageCell.reuseIdentifier)
     }
     
-    
+    //MARK:- Create Layout
     func createLayout() -> UICollectionViewLayout {
         UICollectionViewCompositionalLayout { (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
             let spacing: CGFloat = 1
@@ -144,14 +165,14 @@ extension EditorsChoiceCVC: DiffableDataSourceAndCompositionalLayoutConfigurable
             
             let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                   heightDimension: .absolute(34)),
+                                                   heightDimension: .estimated(50)),
                 elementKind: UICollectionView.elementKindSectionHeader,
                 alignment: .top
             )
             let section = NSCollectionLayoutSection(group: finalGroup)
             section.interGroupSpacing = 0
             //section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
-            //section.boundarySupplementaryItems = [sectionHeader]
+            section.boundarySupplementaryItems = [sectionHeader]
             
             return section
             
